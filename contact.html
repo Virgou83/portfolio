@@ -159,15 +159,48 @@
     </script>
 
 <script>
-        // GESTION DU CLIC SUR L'ENCOCHE (MOBILE)
+        // --- 1. GESTION DU MENU BURGER (Haut de page) ---
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+        const body = document.body;
+
+        if(burger){
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+                body.classList.toggle('no-scroll');
+            });
+        }
+        
+        navLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+                body.classList.remove('no-scroll');
+            });
+        });
+
+        // --- 2. GESTION DE L'ENCOCHE TACTIQUE (Bas de page) ---
         const notch = document.querySelector('.notch-footer');
         
         if(notch) {
-            notch.addEventListener('click', () => {
-                // Bascule la classe 'active' pour ouvrir/fermer au toucher
-                notch.classList.toggle('active');
+            // A. Quand on clique DANS l'encoche
+            notch.addEventListener('click', (e) => {
+                // On l'ouvre
+                notch.classList.add('active');
+                // IMPORTANT : On empêche le clic de "remonter" jusqu'au document
+                // Sinon le document recevrait le clic et fermerait tout de suite l'encoche
+                e.stopPropagation();
+            });
+
+            // B. Quand on clique N'IMPORTE OÙ AILLEURS sur la page
+            document.addEventListener('click', () => {
+                // On ferme l'encoche
+                notch.classList.remove('active');
             });
         }
     </script>
+
 </body>
 </html>

@@ -40,7 +40,7 @@
         <div class="container">
             <div class="grid-2">
                 <div style="text-align: center;">
-                    <img src="moi.jpg" alt="Virgile Sanchez" class="profile-img">
+                    <img src="profil.jpeg" alt="Virgile Sanchez" class="profile-img">
                 </div>
                 <div>
                     <div class="card-preview">
@@ -157,8 +157,8 @@
         </div>
     </div>
 
-    <script>
-        // Menu Burger
+<script>
+        // --- 1. GESTION DU MENU BURGER (Haut de page) ---
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('.nav-links');
         const navLinks = document.querySelectorAll('.nav-links li');
@@ -180,11 +180,23 @@
             });
         });
 
-        // SCRIPT ENCOCHE
+        // --- 2. GESTION DE L'ENCOCHE TACTIQUE (Bas de page) ---
         const notch = document.querySelector('.notch-footer');
+        
         if(notch) {
-            notch.addEventListener('click', () => {
-                notch.classList.toggle('active');
+            // A. Quand on clique DANS l'encoche
+            notch.addEventListener('click', (e) => {
+                // On l'ouvre
+                notch.classList.add('active');
+                // IMPORTANT : On empêche le clic de "remonter" jusqu'au document
+                // Sinon le document recevrait le clic et fermerait tout de suite l'encoche
+                e.stopPropagation();
+            });
+
+            // B. Quand on clique N'IMPORTE OÙ AILLEURS sur la page
+            document.addEventListener('click', () => {
+                // On ferme l'encoche
+                notch.classList.remove('active');
             });
         }
     </script>
