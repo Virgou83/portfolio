@@ -118,18 +118,27 @@
         <div class="footer-bottom"><p>&copy; 2025 Virgile Sanchez. Tous droits réservés.</p></div>
     </footer>
 
-    <script>
-        // Menu Burger
+<script>
+        // Menu Burger & Navigation Mobile
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('.nav-links');
-        if(burger){ burger.addEventListener('click', () => { nav.classList.toggle('nav-active'); burger.classList.toggle('toggle'); }); }
-        
-        // Apparition Scroll
-        document.addEventListener('DOMContentLoaded', function() { window.addEventListener('scroll', reveal); reveal(); });
-        function reveal(){
-            var reveals = document.querySelectorAll('.reveal');
-            for(var i = 0; i < reveals.length; i++){ if(reveals[i].getBoundingClientRect().top < window.innerHeight - 50) reveals[i].classList.add('active'); }
+        const navLinks = document.querySelectorAll('.nav-links li');
+
+        // Ouvrir / Fermer le menu
+        if(burger){
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                burger.classList.toggle('toggle');
+            });
         }
+
+        // FERMER LE MENU QUAND ON CLIQUE SUR UN LIEN (Crucial pour la navigation)
+        navLinks.forEach((link) => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+            });
+        });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <script>
