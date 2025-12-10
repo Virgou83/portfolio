@@ -40,7 +40,7 @@
         <div class="container">
             <div class="grid-2">
                 <div style="text-align: center;">
-                    <img src="profil.jpeg" alt="Virgile Sanchez" class="profile-img">
+                    <img src="moi.jpg" alt="Virgile Sanchez" class="profile-img">
                 </div>
                 <div>
                     <div class="card-preview">
@@ -131,22 +131,17 @@
         </div>
     </section>
 
-<div class="notch-footer">
-        
+    <div class="notch-footer">
         <div class="notch-trigger">
             <span class="pulse-dot"></span>
             <span class="notch-label">Contact</span>
         </div>
-
         <div class="notch-content">
-            
             <div class="notch-brand">
                 <span class="initials">VS</span>
                 <span class="fullname">Virgile Sanchez</span>
             </div>
-
             <div class="notch-sep"></div>
-
             <div class="notch-info">
                 <a href="mailto:svirgile83@gmail.com" class="info-link">
                     <span class="icon">📧</span> svirgile83@gmail.com
@@ -159,64 +154,50 @@
                     <a href="mon-cv.pdf" target="_blank" class="info-link-small highlight">CV &darr;</a>
                 </div>
             </div>
-
         </div>
     </div>
 
-<script>
-        // Menu Burger & Navigation Mobile
+    <script>
+        // Menu Burger
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('.nav-links');
         const navLinks = document.querySelectorAll('.nav-links li');
-        const body = document.body; // On sélectionne le body
+        const body = document.body;
 
-        // Ouvrir / Fermer le menu
         if(burger){
             burger.addEventListener('click', () => {
                 nav.classList.toggle('nav-active');
                 burger.classList.toggle('toggle');
-                // Bloque ou débloque le scroll de la page derrière
                 body.classList.toggle('no-scroll');
             });
         }
-
-        // Fermer le menu quand on clique sur un lien
+        
         navLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 nav.classList.remove('nav-active');
                 burger.classList.remove('toggle');
-                // On n'oublie pas de réactiver le scroll quand on clique
                 body.classList.remove('no-scroll');
             });
         });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-    <script>
-        // REGLAGE MINIMALISTE POUR LES CARTES (Pour ne pas agresser le lecteur)
-        VanillaTilt.init(document.querySelectorAll(".card-preview"), {
-            max: 3,             /* Inclinaison très faible (max 3 degrés) */
-            speed: 400,
-            glare: true,
-            "max-glare": 0.1,   /* Reflet presque invisible */
-            scale: 1.01         /* Zoom microscopique */
-        });
-        
-        // REGLAGE PLUS FORT POUR LA PHOTO (Pour le style)
-        VanillaTilt.init(document.querySelector(".profile-img"), {
-            max: 10, speed: 400, glare: true, "max-glare": 0.3, scale: 1.05
-        });
-    </script>
 
-<script>
-        // GESTION DU CLIC SUR L'ENCOCHE (MOBILE)
+        // SCRIPT ENCOCHE
         const notch = document.querySelector('.notch-footer');
-        
         if(notch) {
             notch.addEventListener('click', () => {
-                // Bascule la classe 'active' pour ouvrir/fermer au toucher
                 notch.classList.toggle('active');
             });
         }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        // Animations 3D Douces
+        VanillaTilt.init(document.querySelectorAll(".card-preview"), {
+            max: 3, speed: 400, glare: true, "max-glare": 0.1, scale: 1.01
+        });
+        VanillaTilt.init(document.querySelector(".profile-img"), {
+            max: 10, speed: 400, glare: true, "max-glare": 0.4, scale: 1.05
+        });
     </script>
 </body>
 </html>
