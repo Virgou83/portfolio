@@ -158,5 +158,17 @@
             max: 3, speed: 400, glare: true, "max-glare": 0.1, scale: 1.01
         });
     </script>
+
+<script>
+        // GESTION DU CLIC SUR L'ENCOCHE (MOBILE)
+        const notch = document.querySelector('.notch-footer');
+        
+        if(notch) {
+            notch.addEventListener('click', () => {
+                // Bascule la classe 'active' pour ouvrir/fermer au toucher
+                notch.classList.toggle('active');
+            });
+        }
+    </script>
 </body>
 </html>
