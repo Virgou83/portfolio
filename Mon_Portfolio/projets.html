@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets - Virgile Sanchez</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">Virgile Sanchez</a>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="presentation.html">À propos</a></li>
+            <li><a href="parcours.html">Parcours</a></li>
+            <li><a href="projets.html" class="active">Projets</a></li>
+            <li><a href="competences.html">Compétences</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+   </nav>
+
+    <div class="page-header">
+        <div class="container reveal">
+            <h1 class="section-title">Mes Projets</h1>
+            <p>Réalisations académiques et professionnelles marquantes.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid-2">
+            <div class="card-preview reveal">
+                <h3>Analyse Financière</h3>
+                <p>Projet Banque de France : Cotation d'une entreprise selon ses performances économiques. Analyse financière approfondie.</p>
+                <br>
+                <a href="#" class="link-arrow">Voir le détail &rarr;</a>
+            </div>
+            <div class="card-preview reveal">
+                <h3>Reprise d'Entreprise</h3>
+                <p>Diagnostic complet (SWOT, Pestel), évaluation du prix de rachat et élaboration d'une stratégie.</p>
+                <br>
+                <a href="#" class="link-arrow">Voir le détail &rarr;</a>
+            </div>
+            <div class="card-preview reveal">
+                <h3>Jeu Créasim</h3>
+                <p>Gestion stratégique d'un atelier de cuisine fictif. Prise de décisions marketing, RH et financières.</p>
+                <br>
+                <a href="#" class="link-arrow">Voir le détail &rarr;</a>
+            </div>
+            <div class="card-preview reveal">
+                <h3>Création d'Entreprise</h3>
+                <p>Business plan complet, de l'idéation à la soutenance devant un jury de professionnels.</p>
+                <br>
+                <a href="#" class="link-arrow">Voir le détail &rarr;</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Virgile Sanchez</h3>
+                    <p class="footer-desc">Étudiant en 3ème année de BUT GEA, option GC2F.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Menu</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="parcours.html">Mon Parcours</a></li>
+                        <li><a href="projets.html">Mes Projets</a></li>
+                        <li><a href="mon-cv.pdf" target="_blank">Télécharger mon CV</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Me Contacter</h3>
+                    <ul class="contact-infos">
+                        <li><span class="icon">📍</span> <span>Chorges, Hautes-Alpes</span></li>
+                        <li><span class="icon">📧</span> <a href="mailto:svirgile83@gmail.com">svirgile83@gmail.com</a></li>
+                        <li><span class="icon">📱</span> <a href="tel:+33771741373">07 71 74 13 73</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2025 Virgile Sanchez. Tous droits réservés.</p></div>
+    </footer>
+
+    <script>
+        // Burger
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        if(burger){ burger.addEventListener('click', () => { nav.classList.toggle('nav-active'); burger.classList.toggle('toggle'); }); }
+        
+        // Reveal
+        window.addEventListener('scroll', reveal); 
+        function reveal(){ var reveals = document.querySelectorAll('.reveal'); for(var i=0; i<reveals.length; i++){ if(reveals[i].getBoundingClientRect().top < window.innerHeight - 150) reveals[i].classList.add('active'); } } reveal();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        // RÉGLAGE ULTRA-DOUX
+        VanillaTilt.init(document.querySelectorAll(".card-preview"), {
+            max: 3, speed: 400, glare: true, "max-glare": 0.1, scale: 1.01
+        });
+    </script>
+</body>
+</html>
