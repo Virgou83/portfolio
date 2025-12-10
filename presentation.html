@@ -192,22 +192,18 @@
             });
         });
 
-        // --- 2. GESTION DE L'ENCOCHE TACTIQUE (Bas de page) ---
+// GESTION DE L'ENCOCHE (Version qui se ferme en cliquant dehors)
         const notch = document.querySelector('.notch-footer');
         
         if(notch) {
-            // A. Quand on clique DANS l'encoche
+            // 1. Clic sur l'encoche : on ouvre/ferme
             notch.addEventListener('click', (e) => {
-                // On l'ouvre
-                notch.classList.add('active');
-                // IMPORTANT : On empêche le clic de "remonter" jusqu'au document
-                // Sinon le document recevrait le clic et fermerait tout de suite l'encoche
-                e.stopPropagation();
+                notch.classList.toggle('active');
+                e.stopPropagation(); // Empêche le clic de remonter à la page
             });
 
-            // B. Quand on clique N'IMPORTE OÙ AILLEURS sur la page
+            // 2. Clic n'importe où ailleurs : on ferme
             document.addEventListener('click', () => {
-                // On ferme l'encoche
                 notch.classList.remove('active');
             });
         }
