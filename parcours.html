@@ -123,23 +123,29 @@
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('.nav-links');
         const navLinks = document.querySelectorAll('.nav-links li');
+        const body = document.body; // On sélectionne le body
 
         // Ouvrir / Fermer le menu
         if(burger){
             burger.addEventListener('click', () => {
                 nav.classList.toggle('nav-active');
                 burger.classList.toggle('toggle');
+                // Bloque ou débloque le scroll de la page derrière
+                body.classList.toggle('no-scroll');
             });
         }
 
-        // FERMER LE MENU QUAND ON CLIQUE SUR UN LIEN (Crucial pour la navigation)
+        // Fermer le menu quand on clique sur un lien
         navLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 nav.classList.remove('nav-active');
                 burger.classList.remove('toggle');
+                // On n'oublie pas de réactiver le scroll quand on clique
+                body.classList.remove('no-scroll');
             });
         });
     </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     <script>
         // RÉGLAGE ULTRA-DOUX (Comme l'accueil)
