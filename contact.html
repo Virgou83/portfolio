@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Virgile Sanchez</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Petits ajustements pour l'espacement des icônes */
+        .contact-icon { font-size: 1.5rem; margin-right: 1rem; }
+        .contact-list li { display: flex; align-items: center; margin-bottom: 1.5rem; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">Virgile Sanchez</a>
+        
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="presentation.html">À propos</a></li>
+            <li><a href="parcours.html">Parcours</a></li>
+            <li><a href="projets.html">Projets</a></li>
+            <li><a href="competences.html">Compétences</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+    <div class="page-header">
+        <div class="container reveal">
+            <h1 class="section-title">Me Contacter</h1>
+            <p>N'hésitez pas à me solliciter pour toute opportunité ou question.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card-preview reveal" style="max-width: 600px; margin: 0 auto; text-align: center;">
+            
+            <ul class="contact-list" style="display: inline-block; text-align: left; margin-bottom: 2rem; margin-top: 1rem;">
+                <li>
+                    <span class="contact-icon">📧</span> 
+                    <strong>Email :</strong>&nbsp; <a href="mailto:svirgile83@gmail.com" style="color:var(--text-dark); text-decoration:none; border-bottom: 1px solid var(--accent-blue);">svirgile83@gmail.com</a> 
+                </li>
+                <li>
+                    <span class="contact-icon">📱</span> 
+                    <strong>Téléphone :</strong>&nbsp; 07 71 74 13 73 
+                </li>
+                <li>
+                    <span class="contact-icon">💼</span> 
+                    <strong>LinkedIn :</strong>&nbsp; <a href="#" style="color: var(--accent-blue); text-decoration: none;">linkedin.com/in/virgile-sanchez</a>
+                </li>
+            </ul>
+            
+            <div style="border-top: 1px solid rgba(0,0,0,0.1); padding-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Mon CV</h3>
+                <p style="margin-bottom: 2rem; color: var(--text-light);">Vous pouvez télécharger mon Curriculum Vitae complet au format PDF.</p>
+                <a href="mon-cv.pdf" class="btn-main" download>Télécharger mon CV</a>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Virgile Sanchez</h3>
+                    <p class="footer-desc">Étudiant en 3ème année de BUT GEA, option GC2F. Passionné par l'audit, le contrôle de gestion et l'analyse financière.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Menu</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="parcours.html">Mon Parcours</a></li>
+                        <li><a href="projets.html">Mes Projets</a></li>
+                        <li><a href="mon-cv.pdf" target="_blank">Télécharger mon CV</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Me Contacter</h3>
+                    <ul class="contact-infos">
+                        <li><span class="icon">📍</span> <span>Chorges, Hautes-Alpes</span></li>
+                        <li><span class="icon">📧</span> <a href="mailto:svirgile83@gmail.com">svirgile83@gmail.com</a></li>
+                        <li><span class="icon">📱</span> <a href="tel:+33771741373">07 71 74 13 73</a></li>
+                        <li><span class="icon">💼</span> <a href="#" target="_blank">Profil LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Virgile Sanchez - Portfolio BUT GEA. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', reveal); 
+        function reveal(){ 
+            var reveals = document.querySelectorAll('.reveal'); 
+            for(var i=0; i<reveals.length; i++){ 
+                if(reveals[i].getBoundingClientRect().top < window.innerHeight - 150) reveals[i].classList.add('active'); 
+            } 
+        } 
+        reveal();
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        VanillaTilt.init(document.querySelectorAll(".card-preview"), {
+            max: 2,            /* Inclinaison minime (2 au lieu de 10) */
+            speed: 400,        /* Vitesse fluide */
+            glare: false,      /* Pas de reflet sur le texte pour la lisibilité */
+            scale: 1.00        /* Pas de zoom, la carte reste stable */
+        });
+    </script>
+<script>
+        const burger = document.querySelector('.burger');
+        const nav = document.querySelector('.nav-links');
+        const navLinks = document.querySelectorAll('.nav-links li');
+
+        burger.addEventListener('click', () => {
+            // Activer le menu
+            nav.classList.toggle('nav-active');
+            // Animation du burger (croix)
+            burger.classList.toggle('toggle');
+        });
+    </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        // LE REGLAGE DOUX (A mettre partout)
+        VanillaTilt.init(document.querySelectorAll(".card-preview, .comp-card, .timeline-content"), {
+            max: 3, 
+            speed: 400, 
+            glare: true, 
+            "max-glare": 0.1, 
+            scale: 1.01
+        });
+    </script>
+</body>
+</html>
