@@ -95,43 +95,7 @@
     </div>
 
 <script>
-        // Menu Burger & Navigation Mobile
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
-        const navLinks = document.querySelectorAll('.nav-links li');
-        const body = document.body; // On sélectionne le body
-
-        // Ouvrir / Fermer le menu
-        if(burger){
-            burger.addEventListener('click', () => {
-                nav.classList.toggle('nav-active');
-                burger.classList.toggle('toggle');
-                // Bloque ou débloque le scroll de la page derrière
-                body.classList.toggle('no-scroll');
-            });
-        }
-
-        // Fermer le menu quand on clique sur un lien
-        navLinks.forEach((link) => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('nav-active');
-                burger.classList.remove('toggle');
-                // On n'oublie pas de réactiver le scroll quand on clique
-                body.classList.remove('no-scroll');
-            });
-        });
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-    <script>
-        // RÉGLAGE ULTRA-DOUX
-        VanillaTilt.init(document.querySelectorAll(".card-preview"), {
-            max: 3, speed: 400, glare: true, "max-glare": 0.1, scale: 1.01
-        });
-    </script>
-
-<script>
-        // --- 1. GESTION DU MENU BURGER (Haut de page) ---
+        // --- 1. MENU BURGER (Mobile) ---
         const burger = document.querySelector('.burger');
         const nav = document.querySelector('.nav-links');
         const navLinks = document.querySelectorAll('.nav-links li');
@@ -145,6 +109,7 @@
             });
         }
         
+        // Fermeture auto du menu quand on clique sur un lien
         navLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 nav.classList.remove('nav-active');
@@ -153,19 +118,50 @@
             });
         });
 
-// GESTION DE L'ENCOCHE (Version qui se ferme en cliquant dehors)
+        // --- 2. ENCOCHE TACTIQUE (Footer) ---
         const notch = document.querySelector('.notch-footer');
         
         if(notch) {
-            // 1. Clic sur l'encoche : on ouvre/ferme
+            // Clic sur l'encoche : Ouvre ou Ferme
             notch.addEventListener('click', (e) => {
+                // On empêche le clic de remonter au document (sinon ça ferme direct)
+                e.stopPropagation();
+                
+                // On bascule l'état
                 notch.classList.toggle('active');
-                e.stopPropagation(); // Empêche le clic de remonter à la page
             });
 
-            // 2. Clic n'importe où ailleurs : on ferme
+            // Clic n'importe où ailleurs sur la page : Ferme
             document.addEventListener('click', () => {
                 notch.classList.remove('active');
+            });
+        }
+
+        // --- 3. APPARITION SCROLL ---
+        window.addEventListener('scroll', reveal); 
+        function reveal(){ 
+            var reveals = document.querySelectorAll('.reveal'); 
+            for(var i=0; i<reveals.length; i++){ 
+                if(reveals[i].getBoundingClientRect().top < window.innerHeight - 50) {
+                    reveals[i].classList.add('active'); 
+                }
+            } 
+        } 
+        reveal();
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script>
+        // Réglage Doux pour les cartes
+        VanillaTilt.init(document.querySelectorAll(".card-preview, .comp-card, .timeline-content"), {
+            max: 3, speed: 400, glare: true, "max-glare": 0.1, scale: 1.01
+        });
+        
+        // Réglage Photo (si elle existe sur la page)
+        const profile = document.querySelector(".profile-img");
+        if(profile) {
+            VanillaTilt.init(profile, {
+                max: 10, speed: 400, glare: true, "max-glare": 0.3, scale: 1.05
             });
         }
     </script>
