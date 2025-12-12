@@ -8,25 +8,6 @@
 </head>
 <body>
 
-   <nav class="navbar">
-    <div class="nav-container">
-        <a href="index.html" class="logo">Virgile Sanchez</a>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active">Accueil</a></li>
-            <li><a href="presentation.html">À propos</a></li>
-            <li><a href="parcours.html">Parcours</a></li>
-            <li><a href="projets.html">Projets</a></li>
-            <li><a href="competences.html">Compétences</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </div>
-   </nav>
-
     <header class="hero">
         <div class="hero-content">
             <p>ÉTUDIANT EN 3ÈME ANNÉE BUT GEA</p>
@@ -39,10 +20,10 @@
     <section id="presentation">
         <div class="container">
             <div class="grid-2">
-                <div style="text-align: center;">
+                <div class="reveal" style="text-align: center;">
                     <img src="profil.jpeg" alt="Virgile Sanchez" class="profile-img">
                 </div>
-                <div>
+                <div class="reveal">
                     <div class="card-preview">
                         <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Qui suis-je ?</h2>
                         <p><strong>Bonjour, je suis Virgile Sanchez.</strong></p>
@@ -57,12 +38,12 @@
     </section>
 
     <section id="parcours">
-        <div class="container">
+        <div class="container reveal">
             <h2 class="section-title">Mon Parcours</h2>
             <div class="grid-3">
                 <div class="card-preview">
                     <h3>BUT GEA</h3>
-                    <p><strong>2023 - 2026 | IUT de Gap</strong><br>Formation universitaire spécialisée en gestion des entreprises.</p>
+                    <p><strong>2023 - 2026 | IUT de Gap</strong><br>Formation universitaire spécialisée en gestion des entreprises et administrations.</p>
                 </div>
                 <div class="card-preview">
                     <h3>CIC Barjols</h3>
@@ -79,34 +60,31 @@
         </div>
     </section>
 
-    <section id="projets">
-        <div class="container">
+<section id="projets">
+        <div class="container reveal">
             <h2 class="section-title">Projets Réalisés</h2>
             <div class="grid-3">
                 <div class="card-preview">
                     <h3>Analyse Financière</h3>
-                    <p>Projet Banque de France : Cotation d'une entreprise selon ses performances.</p>
-                    <br>
-                    <a href="projets.html" class="link-arrow">Détails &rarr;</a>
+                    <p>Projet Banque de France : Cotation d'une entreprise selon ses performances économiques.</p>
                 </div>
                 <div class="card-preview">
                     <h3>Reprise d'Entreprise</h3>
                     <p>Diagnostic complet et stratégie de développement post-reprise.</p>
-                    <br>
-                    <a href="projets.html" class="link-arrow">Détails &rarr;</a>
                 </div>
                 <div class="card-preview">
                     <h3>Création d'Entreprise</h3>
                     <p>Business plan complet, de l'idée à la soutenance devant jury.</p>
-                    <br>
-                    <a href="projets.html" class="link-arrow">Détails &rarr;</a>
                 </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="projets.html" class="btn-main">Voir tous mes projets</a>
             </div>
         </div>
     </section>
 
     <section id="competences">
-        <div class="container">
+        <div class="container reveal">
             <h2 class="section-title">Mes Compétences</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem auto; color: var(--text-dark);">
                 Au cours de ma formation et de mes stages, j'ai validé plusieurs Apprentissages Critiques (AC) essentiels.
@@ -114,15 +92,15 @@
             <div class="grid-3">
                 <div class="card-preview">
                     <h3 style="color: var(--accent-blue);">Analyse</h3>
-                    <p>Analyser les processus de l'organisation dans son environnement.</p>
+                    <p>Analyser les processus de l'organisation dans son environnement et conseiller des améliorations.</p>
                 </div>
                 <div class="card-preview">
                     <h3 style="color: var(--accent-blue);">Décision</h3>
-                    <p>Exploiter les données pour accompagner la prise de décision.</p>
+                    <p>Exploiter les données pour accompagner la prise de décision et minimiser les risques.</p>
                 </div>
                 <div class="card-preview">
                     <h3 style="color: var(--accent-blue);">Production</h3>
-                    <p>Produire l'information comptable, fiscale et sociale.</p>
+                    <p>Produire l'information comptable, fiscale et sociale et sécuriser les données.</p>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 3rem;">
@@ -131,85 +109,8 @@
         </div>
     </section>
 
-    <div class="notch-footer">
-        <div class="notch-trigger">
-            <span class="pulse-dot"></span>
-            <span class="notch-label">Contact</span>
-        </div>
-        <div class="notch-content">
-            <div class="notch-brand">
-                <span class="initials">VS</span>
-                <span class="fullname">Virgile Sanchez</span>
-            </div>
-            <div class="notch-sep"></div>
-            <div class="notch-info">
-                <a href="mailto:svirgile83@gmail.com" class="info-link">
-                    <span class="icon">📧</span> svirgile83@gmail.com
-                </a>
-                <a href="tel:+33771741373" class="info-link">
-                    <span class="icon">📱</span> 07 71 74 13 73
-                </a>
-                <div class="link-row">
-                    <a href="https://www.linkedin.com/in/virgile-sanchez-b0780729b/" target="_blank" class="info-link-small">LinkedIn &nearr;</a>
-                    <a href="mon-cv.pdf" target="_blank" class="info-link-small highlight">CV &darr;</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
-<script>
-        // --- 1. GESTION DU MENU BURGER (Haut de page) ---
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
-        const navLinks = document.querySelectorAll('.nav-links li');
-        const body = document.body;
+    <script src="layout.js"></script>
 
-        if(burger){
-            burger.addEventListener('click', () => {
-                nav.classList.toggle('nav-active');
-                burger.classList.toggle('toggle');
-                body.classList.toggle('no-scroll');
-            });
-        }
-        
-        navLinks.forEach((link) => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('nav-active');
-                burger.classList.remove('toggle');
-                body.classList.remove('no-scroll');
-            });
-        });
-
-        // --- 2. GESTION DE L'ENCOCHE TACTIQUE (Bas de page) ---
-        const notch = document.querySelector('.notch-footer');
-        
-        if(notch) {
-            // A. Quand on clique DANS l'encoche
-            notch.addEventListener('click', (e) => {
-                // On l'ouvre
-                notch.classList.add('active');
-                // IMPORTANT : On empêche le clic de "remonter" jusqu'au document
-                // Sinon le document recevrait le clic et fermerait tout de suite l'encoche
-                e.stopPropagation();
-            });
-
-            // B. Quand on clique N'IMPORTE OÙ AILLEURS sur la page
-            document.addEventListener('click', () => {
-                // On ferme l'encoche
-                notch.classList.remove('active');
-            });
-        }
-    </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
-    <script>
-        // Animations 3D Douces
-        VanillaTilt.init(document.querySelectorAll(".card-preview"), {
-            max: 3, speed: 400, glare: true, "max-glare": 0.1, scale: 1.01
-        });
-        VanillaTilt.init(document.querySelector(".profile-img"), {
-            max: 10, speed: 400, glare: true, "max-glare": 0.4, scale: 1.05
-        });
-    </script>
 </body>
 </html>

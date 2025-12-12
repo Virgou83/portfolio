@@ -1,14 +1,49 @@
-/* Fichier: style.css - VERSION FINALE (BURGER FIN & NAV MOBILE FIX) */
+/* Fichier: style.css - VERSION FINALE (DARK MODE READY) */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Open+Sans:wght@400;600&display=swap');
 
+/* --- DÉFINITION DES VARIABLES (LE CERVEAU DU SITE) --- */
 :root {
+    /* COULEURS MODE CLAIR (Défaut) */
     --primary-blue: #1b3a6e;
     --accent-blue: #4facfe;
     --darker-blue: #0f4c81;
-    --text-dark: #2c3e50;
+    --text-main: #2c3e50;
     --text-light: #6c757d;
-    --bg-light: #f8f9fa;
+    --bg-body: #f8f9fa;
     --white: #ffffff;
+    
+    /* GLASSMORPHISM CLAIR */
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.8);
+    --glass-shadow: rgba(0, 0, 0, 0.05);
+    --card-hover-bg: rgba(255, 255, 255, 0.95);
+    --card-hover-shadow: rgba(79, 172, 254, 0.2);
+    
+    /* NAV & FOOTER */
+    --nav-bg: rgba(255, 255, 255, 0.90);
+    --footer-bg: rgba(15, 23, 42, 0.9);
+    --footer-text: #ffffff;
+}
+
+/* --- VARIABLES MODE SOMBRE (ACTIVÉES PAR LA CLASSE .dark-mode) --- */
+body.dark-mode {
+    --primary-blue: #4facfe; /* Le bleu devient plus clair pour être lisible */
+    --accent-blue: #4facfe;
+    --darker-blue: #ffffff;
+    --text-main: #e2e8f0;    /* Texte blanc cassé */
+    --text-light: #94a3b8;
+    --bg-body: #0f172a;      /* Fond Bleu Nuit Profond */
+    --white: #1e293b;        /* Remplace le blanc par du gris foncé */
+
+    /* GLASSMORPHISM SOMBRE */
+    --glass-bg: rgba(30, 41, 59, 0.7); /* Verre sombre */
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    --card-hover-bg: rgba(30, 41, 59, 0.95);
+    --card-hover-shadow: rgba(79, 172, 254, 0.15);
+    
+    /* NAV */
+    --nav-bg: rgba(15, 23, 42, 0.90);
 }
 
 /* RESET */
@@ -16,34 +51,39 @@
 html, body { width: 100%; height: 100%; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
 
-/* BODY */
+/* BODY AVEC TRANSITION DOUCE POUR LE CHANGEMENT DE MODE */
 body { 
     font-family: 'Open Sans', sans-serif; 
     line-height: 1.6; 
-    color: var(--text-dark); 
-    background: var(--bg-light); 
+    color: var(--text-main); 
+    background: var(--bg-body); 
     display: flex; flex-direction: column; min-height: 100vh; 
     position: relative;
     overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* FOND ANIMÉ */
+@property --mouse-x { syntax: '<length>'; inherits: false; initial-value: 50%; }
+@property --mouse-y { syntax: '<length>'; inherits: false; initial-value: 50%; }
+
+/* Note: Les orbes restent les mêmes, mais ressortent mieux en dark mode */
 @keyframes float1 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(30vw, 20vh) scale(1.1); } 100% { transform: translate(10vw, 40vh) scale(0.9); } }
 @keyframes float2 { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-30vw, -20vh) scale(1.2); } 100% { transform: translate(-10vw, -30vh) scale(0.9); } }
 @keyframes subtleFloat { 0% { transform: translateY(5px); } 100% { transform: translateY(-12px); } }
 
-body::before { content: ''; position: fixed; top: -10%; left: -10%; width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(27, 58, 110, 0.25) 0%, rgba(27, 58, 110, 0) 70%); filter: blur(60px); z-index: -1; animation: float1 15s infinite alternate ease-in-out; }
-body::after { content: ''; position: fixed; bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(79, 172, 254, 0.25) 0%, rgba(79, 172, 254, 0) 70%); filter: blur(50px); z-index: -1; animation: float2 18s infinite alternate-reverse ease-in-out; }
+body::before { content: ''; position: fixed; top: -10%; left: -10%; width: 70vw; height: 70vw; background: radial-gradient(circle, rgba(27, 58, 110, 0.45) 0%, rgba(27, 58, 110, 0) 70%); filter: blur(60px); z-index: -1; animation: float1 15s infinite alternate ease-in-out; }
+body::after { content: ''; position: fixed; bottom: -10%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(79, 172, 254, 0.40) 0%, rgba(79, 172, 254, 0) 70%); filter: blur(50px); z-index: -1; animation: float2 18s infinite alternate-reverse ease-in-out; }
 
 /* NAVIGATION */
 .navbar { 
-    background: rgba(255, 255, 255, 0.90);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     position: fixed; top: 0; left: 0; width: 100%; 
-    z-index: 9999;
-    height: 70px; display: flex; align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 9999; height: 70px; display: flex; align-items: center;
+    border-bottom: 1px solid var(--glass-border);
     box-shadow: 0 1px 15px rgba(0,0,0,0.03);
+    transition: background 0.5s ease;
 }
 
 .nav-container { 
@@ -51,20 +91,35 @@ body::after { content: ''; position: fixed; bottom: -10%; right: -10%; width: 60
     display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; 
 }
 
+/* Nouveau conteneur pour aligner Liens + Toggle + Burger */
+.nav-right {
+    display: flex; align-items: center; gap: 25px;
+}
+
 .logo { 
     font-family: 'Montserrat', sans-serif; font-size: 1.1rem; font-weight: 800; 
     text-decoration: none; color: var(--primary-blue); text-transform: uppercase; letter-spacing: 0.5px;
-    z-index: 10002; /* Toujours au dessus du menu mobile */
+    z-index: 10002;
 }
 
-.nav-links { display: flex; list-style: none; gap: 2rem; }
+.nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
 .nav-links a { 
-    color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 0.95rem; 
+    color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.95rem; 
     transition: all 0.2s ease;
 }
 .nav-links a:hover, .nav-links a.active { 
-    color: var(--darker-blue); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px;
+    color: var(--accent-blue); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px;
 }
+
+/* BOUTON THEME (Positionné hors du menu maintenant) */
+.theme-toggle {
+    cursor: pointer; font-size: 1.4rem; 
+    transition: transform 0.3s ease; 
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px;
+    z-index: 10002; /* Toujours accessible */
+}
+.theme-toggle:hover { transform: rotate(15deg) scale(1.1); }
 
 /* STRUCTURE */
 .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; width: 100%; }
@@ -75,21 +130,41 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: var(--primary-blue); 
 .section-title { font-size: 2rem; color: var(--primary-blue); margin-bottom: 2rem; text-align: center; position: relative; padding-bottom: 0.8rem; font-weight: 700; }
 .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-blue); margin: 0.5rem auto 0; border-radius: 2px; }
 
-/* CARTES GLASSMORPHISM */
+/* CARTES (Utilisation des Variables) */
 .card-preview, .comp-card, .timeline-content {
-    background: rgba(255, 255, 255, 0.55); 
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-top: 1px solid rgba(255, 255, 255, 0.9); border-left: 1px solid rgba(255, 255, 255, 0.9);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    background: var(--glass-bg); /* Variable */
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); /* Variable */
     border-radius: 20px; padding: 2rem;
-    transform-style: preserve-3d; transform: perspective(1000px);
+    position: relative; overflow: hidden; 
+    transition: all 0.4s ease;
+    box-shadow: 0 5px 15px var(--glass-shadow); /* Variable */
 }
+
+/* LE RAYON DE LUMIÈRE (Adapté pour les deux modes) */
+.card-preview::before, .comp-card::before, .timeline-content::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent); /* Un peu moins fort pour passer partout */
+    transform: skewX(-25deg); transition: none; z-index: 1; pointer-events: none;
+}
+
+.card-preview:hover, .comp-card:hover, .timeline-content:hover {
+    transform: translateY(-8px); 
+    background: var(--card-hover-bg); /* Variable */
+    border-color: var(--accent-blue);
+    box-shadow: 0 20px 40px var(--card-hover-shadow); /* Variable */
+}
+
+.card-preview:hover::before, .comp-card:hover::before, .timeline-content:hover::before {
+    left: 150%; transition: left 0.7s;
+}
+
+.card-preview h3, .card-preview p, .card-preview a, .comp-card *, .timeline-content * { position: relative; z-index: 2; }
 
 /* IMAGES */
 .profile-img {
     width: 280px; height: 280px; object-fit: cover;
-    border-radius: 50%; border: 5px solid rgba(255, 255, 255, 0.9);
+    border-radius: 50%; border: 5px solid var(--glass-border);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     animation: subtleFloat 5s ease-in-out infinite alternate;
 }
@@ -101,20 +176,24 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: var(--primary-blue); 
 
 /* HERO */
 .hero {
-    min-height: 70vh; background: linear-gradient(135deg, var(--primary-blue) 0%, #0b1a30 100%);
+    min-height: 70vh; 
+    /* Gradient spécial qui s'adapte ou reste fixe */
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #0b1a30 100%);
     display: flex; align-items: center; justify-content: center; text-align: center;
     padding: 8rem 1rem 3rem 1rem; position: relative; overflow: hidden; margin-top: 0;
 }
+body.dark-mode .hero { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+
 .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 80%, rgba(79, 172, 254, 0.15) 0%, transparent 50%); }
 .hero-content { max-width: 800px; z-index: 1; width: 100%; }
-.hero h1 { color: white; font-size: 3rem; margin-bottom: 1rem; font-weight: 800; line-height: 1.2; }
+.hero h1 { color: #ffffff; font-size: 3rem; margin-bottom: 1rem; font-weight: 800; line-height: 1.2; } /* Le titre Hero reste blanc */
 .hero p { color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 2rem; }
 .highlight { color: var(--accent-blue); }
 
-/* BOUTONS SHINE */
+/* BOUTONS */
 .btn-main, .link-arrow {
     position: relative; overflow: hidden; display: inline-block; 
-    padding: 0.9rem 2rem; background: var(--accent-blue); color: white;
+    padding: 0.9rem 2rem; background: var(--accent-blue); color: #ffffff !important; /* Force blanc */
     text-decoration: none; border-radius: 50px; font-weight: 700; 
     transition: all 0.3s ease; z-index: 1; box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
@@ -125,96 +204,55 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: var(--primary-blue); 
 }
 .btn-main:hover, .link-arrow:hover { background: var(--darker-blue); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6); }
 .btn-main:hover::before, .link-arrow:hover::before { left: 100%; }
-.link-arrow { background: white; color: var(--accent-blue); border: 2px solid var(--accent-blue); padding: 0.6rem 1.5rem; }
-.link-arrow:hover { background: var(--accent-blue); color: white; }
+.link-arrow { background: var(--white); color: var(--accent-blue) !important; border: 2px solid var(--accent-blue); padding: 0.6rem 1.5rem; }
+.link-arrow:hover { background: var(--accent-blue); color: #ffffff !important; }
 
 /* ELEMENTS DIVERS */
 .timeline-container { max-width: 800px; margin: 0 auto; position: relative; padding: 2rem 0; }
 .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 20px; width: 3px; background: rgba(27, 58, 110, 0.1); border-radius: 2px; }
+body.dark-mode .timeline-container::before { background: rgba(255, 255, 255, 0.1); } /* Ajustement dark mode */
+
 .timeline-item { position: relative; margin-bottom: 3rem; padding-left: 60px; }
-.timeline-item::after { content: ''; position: absolute; left: 11px; top: 0; width: 20px; height: 20px; background: var(--accent-blue); border: 4px solid white; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.timeline-item::after { content: ''; position: absolute; left: 11px; top: 0; width: 20px; height: 20px; background: var(--accent-blue); border: 4px solid var(--bg-body); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .timeline-date { display: inline-block; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--accent-blue); text-transform: uppercase; margin-bottom: 0.5rem; }
 .timeline-content { border-left: 4px solid var(--primary-blue); }
 .ac-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
 .ac-code { font-weight: 800; color: var(--accent-blue); min-width: 75px; }
 
-/* =========================================
-   FOOTER "ENCOCHE TACTIQUE" (OPTIMISÉ)
-   ========================================= */
-
+/* FOOTER NOTCH */
 .notch-footer {
-    position: fixed;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9998;
-    
-    width: 110px;
-    height: 40px;
-    background: rgba(15, 23, 42, 0.95); /* Plus opaque = moins de calculs pour le flou */
+    position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 9998;
+    width: 110px; height: 40px;
+    background: var(--footer-bg); /* Variable */
     backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    
-    overflow: hidden;
-    color: white;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-
-    /* OPTIMISATION FLUIDITÉ : Indique au navigateur quoi préparer */
+    border-radius: 50px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden; color: var(--footer-text); cursor: pointer;
+    -webkit-tap-highlight-color: transparent; user-select: none;
     will-change: width, height, border-radius, bottom;
-    /* Transition un peu plus rapide pour sensation de fluidité */
     transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
 }
-
-/* ÉTAT OUVERT */
 .notch-footer:hover, .notch-footer.active {
-    width: 480px;
-    height: 160px;
-    border-radius: 25px;
-    bottom: 25px;
-    background: rgba(15, 23, 42, 0.98);
+    width: 480px; height: 160px; border-radius: 25px; bottom: 25px;
+    background: rgba(15, 23, 42, 0.98); /* Reste sombre même en light mode pour le style */
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
-
-/* TRIGGER */
-.notch-trigger {
-    display: flex; align-items: center; justify-content: center;
-    height: 40px; width: 100%; position: absolute; top: 0; left: 0;
-    transition: opacity 0.2s ease-out; /* Disparition plus rapide */
-}
-
-.notch-footer:hover .notch-trigger, .notch-footer.active .notch-trigger {
-    opacity: 0; pointer-events: none;
-}
-
+.notch-trigger { display: flex; align-items: center; justify-content: center; height: 40px; width: 100%; position: absolute; top: 0; left: 0; transition: opacity 0.2s ease-out; }
+.notch-footer:hover .notch-trigger, .notch-footer.active .notch-trigger { opacity: 0; pointer-events: none; }
 .notch-label { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-left: 8px; }
 .pulse-dot { width: 6px; height: 6px; background-color: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.7); animation: pulse-blue 2s infinite; }
 @keyframes pulse-blue { 0% { box-shadow: 0 0 0 0 rgba(79, 172, 254, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(79, 172, 254, 0); } 100% { box-shadow: 0 0 0 0 rgba(79, 172, 254, 0); } }
 
-/* --- CONTENU (SÉCURISÉ) --- */
+/* CONTENU NOTCH */
 .notch-content {
     display: flex; align-items: center; padding: 25px; height: 100%;
-    opacity: 0; transform: translateY(10px);
-    
-    /* LE SECRET EST ICI : */
-    pointer-events: none; /* Par défaut, on ne peut RIEN cliquer dedans */
-    
-    transition: all 0.3s ease 0.1s;
+    opacity: 0; transform: translateY(10px); visibility: hidden; pointer-events: none;
+    transition: all 0.2s ease;
 }
-
-/* QUAND C'EST OUVERT (Hover ou Active) */
 .notch-footer:hover .notch-content, .notch-footer.active .notch-content {
-    opacity: 1; transform: translateY(0);
-    
-    /* ON RÉACTIVE LES CLICS AVEC UN DÉLAI */
-    pointer-events: auto; /* Maintenant on peut cliquer */
-    transition-delay: 0.2s; /* On attend 0.2s (le temps que ça s'ouvre) avant d'autoriser le clic */
+    opacity: 1; transform: translateY(0); visibility: visible; pointer-events: auto;
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s, visibility 0s 0s, pointer-events 0s 0.5s;
 }
-
-/* INTERIEUR */
 .notch-brand { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
 .initials { font-family: 'Montserrat', sans-serif; font-size: 2.5rem; font-weight: 800; color: var(--accent-blue); line-height: 1; background: -webkit-linear-gradient(45deg, #fff, var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .fullname { font-size: 0.75rem; opacity: 0.6; margin-top: 5px; letter-spacing: 0.5px; }
@@ -229,95 +267,56 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; color: var(--primary-blue); 
 .info-link-small.highlight { border-color: var(--accent-blue); color: var(--accent-blue); }
 .info-link-small.highlight:hover { background: var(--accent-blue); color: white; }
 
-/* Mobile Adaptations */
-@media screen and (max-width: 768px) {
-    .notch-footer {
-        /* Moins de flou sur mobile = meilleure perf */
-        backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    }
-    .notch-footer:hover, .notch-footer.active {
-        width: 92%; /* Prend presque toute la largeur */
-        height: auto; 
-        flex-direction: column; 
-        padding: 20px;
-    }
-    .notch-content { flex-direction: column; text-align: center; }
-    .notch-sep { width: 100%; height: 1px; margin: 15px 0; }
-    .notch-brand { min-width: auto; }
-    .notch-info { width: 100%; }
-    .info-link { justify-content: center; }
-    .link-row { justify-content: center; }
-}
-
-/* ================= MOBILE & TABLETTE ================= */
-
-/* Classe utilitaire pour bloquer le scroll du body quand le menu est ouvert */
-body.no-scroll {
-    overflow: hidden;
-}
-
+/* MOBILE & TABLETTE */
 .burger { display: none; cursor: pointer; }
-/* Burger fin et élégant */
-.burger div { width: 22px; height: 2px; background-color: var(--primary-blue); margin: 5px; transition: all 0.3s ease; border-radius: 10px; }
+.burger div { width: 22px; height: 2px; background-color: var(--text-main); margin: 5px; transition: all 0.3s ease; border-radius: 10px; }
 
 @media screen and (max-width: 768px) {
-    body { overflow-x: hidden; }
-    .container { padding: 1rem; }
-    section { padding: 4rem 1rem; }
+    body { overflow-x: hidden; } .container { padding: 1rem; } section { padding: 4rem 1rem; }
     
-    .burger { display: block; z-index: 10002; } 
+    /* On rapproche un peu le toggle du burger sur mobile */
+    .nav-right { gap: 15px; }
     
-    /* Menu Mobile : Plus compact et propre */
+    .burger { display: block; z-index: 10002; }
+    
     .nav-links {
-        position: fixed; 
-        right: 0; 
-        top: 70px; 
-        height: calc(100vh - 70px); 
-        background: rgba(255, 255, 255, 0.95); /* Un peu plus opaque pour la lisibilité */
-        backdrop-filter: blur(15px);
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        justify-content: flex-start; /* On aligne vers le haut, pas centré, pour gagner de la place */
-        padding-top: 2rem; /* Espace du haut réduit */
-        gap: 1.5rem; /* Espace entre les liens réduit (c'était beaucoup plus avant) */
-        width: 100%; 
-        transform: translateX(100%); 
-        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        box-shadow: -5px 10px 15px rgba(0,0,0,0.05);
+        position: fixed; right: 0; top: 70px; height: calc(100vh - 70px);
+        background: var(--nav-bg);
+        backdrop-filter: blur(15px); display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+        padding-top: 2rem; gap: 1.5rem; width: 100%; transform: translateX(100%); 
+        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: -5px 10px 15px rgba(0,0,0,0.05);
     }
-    
     .nav-links.nav-active { transform: translateX(0%); }
+    .nav-links li { width: 100%; text-align: center; opacity: 1; margin: 0; }
+    .nav-links a { font-size: 1.1rem; color: var(--text-main); display: inline-block; padding: 0.5rem 2rem; border-radius: 50px; }
     
-    .nav-links li { 
-        width: 100%; text-align: center; opacity: 1; margin: 0; 
-    }
-    
-    /* Police réduite pour faire moins "gros pâté" */
-    .nav-links a { 
-        font-size: 1.1rem; /* Beaucoup plus fin (c'était 1.5rem) */
-        color: var(--primary-blue); 
-        display: inline-block; 
-        padding: 0.5rem 2rem;
-        border-radius: 50px;
-    }
-    
-    .nav-links a:hover { 
-        background: rgba(27, 58, 110, 0.05); 
-    }
-
-    /* Animation Croix Burger */
-    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 5px); }
-    .toggle .line2 { opacity: 0; }
-    .toggle .line3 { transform: rotate(45deg) translate(-5px, -5px); }
-
-    /* Ajustements généraux mobile */
-    .hero h1 { font-size: 1.8rem; } /* Titre un peu plus petit sur mobile */
-    .hero p { font-size: 1rem; padding: 0 10px; }
-    .grid-2, .grid-3, .ac-grid-2, .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    /* Le reste du CSS mobile reste inchangé... */
+    .toggle .line1 { transform: rotate(-45deg) translate(-5px, 5px); } .toggle .line2 { opacity: 0; } .toggle .line3 { transform: rotate(45deg) translate(-5px, -5px); }
+    .hero h1 { font-size: 1.8rem; } .hero p { font-size: 1rem; padding: 0 10px; }
+    .grid-2, .grid-3, .ac-grid-2 { grid-template-columns: 1fr; gap: 2rem; }
     .profile-img { width: 180px; height: 180px; margin-bottom: 2rem; }
+    .timeline-container::before { left: 10px; } .timeline-item { padding-left: 35px; } .timeline-item::after { left: 2px; }
+    .notch-footer:hover, .notch-footer.active { width: 92%; height: auto; flex-direction: column; padding: 20px; }
+    .notch-content { flex-direction: column; text-align: center; } .notch-sep { width: 100%; height: 1px; margin: 15px 0; }
+    .notch-brand { min-width: auto; } .notch-info { width: 100%; } .info-link { justify-content: center; } .link-row { justify-content: center; }
+}
+
+/* --- CORRECTIF CONTRASTE BOUTONS (MODE SOMBRE) --- */
+
+/* 1. Le bouton devient BLANC ÉCLATANT au survol */
+body.dark-mode .btn-main:hover,
+body.dark-mode .link-arrow:hover {
+    background-color: #ffffff;       /* Fond Blanc */
+    color: #1b3a6e !important;       /* Texte Bleu Foncé (pour la lisibilité) */
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); /* Petit effet néon */
+}
+
+/* 2. L'animation (le slide) devient BLEU NUIT (pour se voir sur le blanc) */
+body.dark-mode .btn-main::before,
+body.dark-mode .link-arrow::before {
+    /* On remplace le dégradé blanc par un dégradé bleu nuit (#0f172a) */
+    background: linear-gradient(120deg, transparent, #0f172a, transparent);
     
-    .timeline-container::before { left: 10px; }
-    .timeline-item { padding-left: 35px; }
-    .timeline-item::after { left: 2px; }
+    /* Optionnel : Si vous le trouvez trop pâle, augmentez l'opacité ici */
+    opacity: 0.8; 
 }
