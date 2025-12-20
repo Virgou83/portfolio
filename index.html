@@ -8,14 +8,22 @@
 </head>
 <body>
 
-    <header class="hero">
+<div class="background-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+<section class="hero" id="accueil">
+    <div class="hero-glass-card">
         <div class="hero-content">
-            <p>ÉTUDIANT EN 3ÈME ANNÉE BUT GEA</p>
-            <h1>Gestion Comptable, <br><span class="highlight">Financière et Fiscale</span></h1>
-            <p>Bienvenue sur mon portfolio. Je me spécialise dans l'audit, le contrôle de gestion et l'analyse financière.</p>
+            <h1>Bienvenue.</h1>
+            <h2 class="hero-subtitle">PORTFOLIO DE VIRGILE SANCHEZ</h2>
+            <p>Une exploration de mon parcours, de mes projets et de ma vision de la finance.</p>
             <a href="#presentation" class="btn-main">Découvrir mon profil</a>
         </div>
-    </header>
+    </div>
+</section>
 
     <section id="presentation">
         <div class="container">
@@ -108,6 +116,27 @@
             </div>
         </div>
     </section>
+
+<script>
+    // Sélectionne tous les liens qui commencent par # (ancres)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // On bloque le comportement par défaut
+
+            // On trouve la cible (ex: #presentation)
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                // LA MAGIE EST ICI : block: 'center'
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center' // Aligne le milieu de la section au milieu de l'écran
+                });
+            }
+        });
+    });
+</script>
 
 
     <script src="layout.js"></script>
