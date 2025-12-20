@@ -69,7 +69,7 @@ function initGlobalScripts() {
     /* BURGER MENU */
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li'); // Plus besoin d'exclure le toggle
+    const navLinks = document.querySelectorAll('.nav-links li');
     const body = document.body;
 
     if(burger){
@@ -88,17 +88,21 @@ function initGlobalScripts() {
         });
     });
 
-    /* DARK MODE TOGGLE */
+    /* DARK MODE TOGGLE (AVEC CORRECTIF MOBILE "REPAINT") */
     const themeToggle = document.querySelector('.theme-toggle');
     const savedTheme = localStorage.getItem('theme');
 
+    // Appliquer le thème sauvegardé au chargement
     if(savedTheme === 'dark') {
         body.classList.add('dark-mode');
         themeToggle.textContent = '☀️';
     }
 
     themeToggle.addEventListener('click', () => {
+        // 1. Basculer la classe
         body.classList.toggle('dark-mode');
+
+        // 2. Changer l'icône et sauvegarder
         if(body.classList.contains('dark-mode')){
             themeToggle.textContent = '☀️';
             localStorage.setItem('theme', 'dark');
@@ -106,9 +110,18 @@ function initGlobalScripts() {
             themeToggle.textContent = '🌙';
             localStorage.setItem('theme', 'light');
         }
+
+        // 3. --- FIX REPAINT MOBILE (ANTI-GLITCH) ---
+        // On force le navigateur à redessiner l'arrière-plan pour éviter les bugs de texture
+        const bg = document.querySelector('.background-container');
+        if (bg) {
+            bg.style.display = 'none'; // On cache...
+            bg.offsetHeight;           // On force le calcul (Reflow)...
+            bg.style.display = 'block';// On réaffiche instantanément.
+        }
     });
 
-    /* NOTCH FOOTER & SCROLL REVEAL (Code inchangé) */
+    /* NOTCH FOOTER & SCROLL REVEAL */
     const notch = document.querySelector('.notch-footer');
     if(notch) {
         notch.addEventListener('click', (e) => { e.stopPropagation(); notch.classList.toggle('active'); });

@@ -410,3 +410,17 @@ body.dark-mode .timeline-container::before { background: rgba(255, 255, 255, 0.1
     .notch-content { flex-direction: column; text-align: center; } .notch-sep { width: 100%; height: 1px; margin: 15px 0; }
     .notch-brand { min-width: auto; } .notch-info { width: 100%; } .info-link { justify-content: center; } .link-row { justify-content: center; }
 }
+
+/* --- CORRECTIF MOBILE (ANTI-GLITCH) --- */
+.background-container, .blob, .hero-glass-card, .card-preview {
+    /* Force l'accélération matérielle (GPU) */
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    
+    /* Empêche le clignotement sur iOS */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    
+    /* Optimisation pour le changement de propriétés */
+    will-change: transform, opacity, background-color;
+}
