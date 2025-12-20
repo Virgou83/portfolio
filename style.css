@@ -59,7 +59,14 @@ html {
     scroll-behavior: smooth; 
     overflow-x: hidden; 
     /* Marge de sécurité standard pour la navigation manuelle */
-    scroll-padding-top: 100px; 
+    scroll-padding-top: 80px; 
+}
+
+/* AJOUT POUR LE SCROLL MOBILE */
+section {
+    /* Quand on scroll vers une section, on laisse 90px d'espace en haut */
+    /* Ça évite que ta tête soit cachée par la barre de menu */
+    scroll-margin-top: -50px; 
 }
 
 body { 

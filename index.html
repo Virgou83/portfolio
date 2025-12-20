@@ -118,26 +118,28 @@
     </section>
 
 <script>
-    // Sélectionne tous les liens qui commencent par # (ancres)
+    // Sélectionne tous les liens ancres
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault(); // On bloque le comportement par défaut
-
-            // On trouve la cible (ex: #presentation)
+            e.preventDefault(); 
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {
-                // LA MAGIE EST ICI : block: 'center'
+                // On vérifie si on est sur mobile (écran < 768px)
+                const isMobile = window.innerWidth <= 768;
+
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
-                    block: 'center' // Aligne le milieu de la section au milieu de l'écran
+                    // C'EST ICI LE SECRET :
+                    // Mobile -> 'start' (Aligne le haut de la section en haut de l'écran = On voit ta tête)
+                    // PC -> 'center' (Aligne le milieu de la section au milieu de l'écran = Esthétique)
+                    block: isMobile ? 'start' : 'center'
                 });
             }
         });
     });
 </script>
-
 
     <script src="layout.js"></script>
 
