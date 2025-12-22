@@ -1,13 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 1. HEADER INJECTION (BOUTON ACCESSIBLE MOBILE) --- */
+    /* --- 0. BACKGROUND INJECTION (AUTOMATIQUE) --- */
+    const backgroundHTML = `
+    <div class="background-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    `;
+    document.body.insertAdjacentHTML("afterbegin", backgroundHTML);
+
+    /* --- 1. HEADER INJECTION --- */
     const headerHTML = `
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">Virgile Sanchez</a>
-            
             <div class="nav-right">
-                
                 <ul class="nav-links">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="presentation.html">À propos</a></li>
@@ -16,9 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <li><a href="competences.html">Compétences</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-
                 <div class="theme-toggle" title="Changer le thème">🌙</div>
-
                 <div class="burger">
                     <div class="line1"></div>
                     <div class="line2"></div>
@@ -28,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </nav>
     `;
-    document.body.insertAdjacentHTML("afterbegin", headerHTML);
+    document.body.insertAdjacentHTML("beforeend", headerHTML); 
 
     /* --- 2. FOOTER INJECTION --- */
     const footerHTML = `
@@ -69,7 +75,7 @@ function initGlobalScripts() {
     /* BURGER MENU */
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li'); // Plus besoin d'exclure le toggle
+    const navLinks = document.querySelectorAll('.nav-links li');
     const body = document.body;
 
     if(burger){
@@ -88,7 +94,7 @@ function initGlobalScripts() {
         });
     });
 
-    /* DARK MODE TOGGLE */
+    /* DARK MODE TOGGLE (AVEC CORRECTIF "NUCLEAR" ANTI-GLITCH) */
     const themeToggle = document.querySelector('.theme-toggle');
     const savedTheme = localStorage.getItem('theme');
 
@@ -99,6 +105,7 @@ function initGlobalScripts() {
 
     themeToggle.addEventListener('click', () => {
         body.classList.toggle('dark-mode');
+        
         if(body.classList.contains('dark-mode')){
             themeToggle.textContent = '☀️';
             localStorage.setItem('theme', 'dark');
@@ -106,9 +113,33 @@ function initGlobalScripts() {
             themeToggle.textContent = '🌙';
             localStorage.setItem('theme', 'light');
         }
+
+        /* --- LE CORRECTIF COMPLET --- */
+        
+        // 1. On réveille le fond (comme avant)
+        const bg = document.querySelector('.background-container');
+        if (bg) {
+            bg.style.display = 'none';
+            bg.offsetHeight; // Force le calcul
+            bg.style.display = 'block';
+        }
+
+        // 2. NOUVEAU : On réveille TOUTES les cartes de verre présentes sur la page
+        // On sélectionne tout ce qui ressemble à une carte vitrée
+        const glassElements = document.querySelectorAll('.card-preview, .comp-card, .timeline-content, .hero-glass-card, .navbar');
+        
+        glassElements.forEach(el => {
+            // Petite astuce invisible : on change une propriété infime pour forcer le GPU à redessiner la carte
+            el.style.transform = "translate3d(0,0,0) scale(1.0001)";
+            
+            // On remet normal juste après (tellement vite que c'est invisible à l'oeil nu)
+            setTimeout(() => {
+                el.style.transform = "translate3d(0,0,0) scale(1)";
+            }, 50);
+        });
     });
 
-    /* NOTCH FOOTER & SCROLL REVEAL (Code inchangé) */
+    /* NOTCH FOOTER & SCROLL REVEAL */
     const notch = document.querySelector('.notch-footer');
     if(notch) {
         notch.addEventListener('click', (e) => { e.stopPropagation(); notch.classList.toggle('active'); });

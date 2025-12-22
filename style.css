@@ -84,8 +84,16 @@ section {
     z-index: -1; overflow: hidden; pointer-events: none; 
 }
 
-/* Correctif Anti-Glitch Mobile (Force GPU) */
-.background-container, .blob, .hero-glass-card, .card-preview {
+/* Correctif Anti-Glitch Mobile (Force GPU) - APPLIQUÉ À TOUS LES ÉLÉMENTS VERRE */
+.background-container, 
+.blob, 
+.hero-glass-card, 
+.card-preview,
+.comp-card,          /* AJOUTÉ : Pour la page Compétences */
+.timeline-content,   /* AJOUTÉ : Pour la page Parcours */
+.notch-footer,       /* AJOUTÉ : Pour le footer */
+.navbar              /* AJOUTÉ : Pour le menu */
+{
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
