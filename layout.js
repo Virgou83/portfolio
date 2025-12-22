@@ -1,7 +1,6 @@
-/* Copiez ceci dans layout.js */
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* 1. FOND */
+    /* 1. INJECTION DU FOND */
     if (!document.querySelector('.background-container')) {
         document.body.insertAdjacentHTML("afterbegin", `
         <div class="background-container">
@@ -11,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>`);
     }
 
-    /* 2. HEADER */
+    /* 2. INJECTION HEADER */
     document.body.insertAdjacentHTML("beforeend", `
     <nav class="navbar">
         <div class="nav-container">
@@ -31,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </nav>`);
 
-    /* 3. FOOTER */
+    /* 3. INJECTION FOOTER */
     document.body.insertAdjacentHTML("beforeend", `
     <div class="notch-footer">
         <div class="notch-trigger"><span class="pulse-dot"></span><span class="notch-label">Contact</span></div>
@@ -49,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initGlobalScripts() {
-    /* BURGER */
+    /* MENU BURGER */
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
     if(burger){
@@ -65,7 +64,7 @@ function initGlobalScripts() {
         document.body.classList.remove('no-scroll');
     }));
 
-    /* THEME & REPAINT FIX */
+    /* --- GESTION DU THÈME ET FIX TEXTURE --- */
     const themeToggle = document.querySelector('.theme-toggle');
     if(localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
@@ -73,31 +72,34 @@ function initGlobalScripts() {
     }
 
     themeToggle.addEventListener('click', () => {
+        // 1. Basculer le thème
         document.body.classList.toggle('dark-mode');
         const isDark = document.body.classList.contains('dark-mode');
         themeToggle.textContent = isDark ? '☀️' : '🌙';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
 
-        // LE FIX : On force le navigateur à recalculer le fond
-        const bg = document.querySelector('.background-container');
-        if (bg) {
-            bg.style.display = 'none';
-            bg.offsetHeight; 
-            bg.style.display = 'block';
-        }
+        // 2. LE FIX RADICAL ("BLINK")
+        // On ajoute la classe qui DÉSACTIVE tout le flou
+        document.body.classList.add('is-switching');
+
+        // On force le navigateur à prendre en compte ce changement
+        void document.body.offsetWidth; 
+
+        // Après 50ms, on enlève la classe (le flou revient, calculé sur le nouveau fond)
+        setTimeout(() => {
+            document.body.classList.remove('is-switching');
+        }, 50);
     });
 
-    /* ACTIVE LINKS */
+    /* ACTIVE LINKS & FOOTER & SCROLL */
     const path = window.location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll('.nav-links a').forEach(a => {
         if(a.getAttribute('href') === path) a.classList.add('active');
     });
 
-    /* FOOTER */
     const notch = document.querySelector('.notch-footer');
     if(notch) notch.addEventListener('click', () => notch.classList.toggle('active'));
     
-    /* SCROLL REVEAL */
     const checkReveal = () => document.querySelectorAll('.reveal').forEach(r => { 
         if(r.getBoundingClientRect().top < window.innerHeight - 100) r.classList.add('active'); 
     });
