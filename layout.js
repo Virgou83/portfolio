@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 0. BACKGROUND INJECTION (GÉRÉ PAR JS POUR TOUTES LES PAGES) --- */
-    // On vérifie d'abord s'il n'est pas déjà là pour éviter les doublons
+    /* --- 0. BACKGROUND INJECTION --- */
     if (!document.querySelector('.background-container')) {
         const backgroundHTML = `
         <div class="background-container">
@@ -97,7 +96,7 @@ function initGlobalScripts() {
         });
     });
 
-    /* DARK MODE TOGGLE (METHODE "FLASH" ANTI-GLITCH) */
+    /* DARK MODE TOGGLE (AVEC SCROLL HACK ANTI-GLITCH) */
     const themeToggle = document.querySelector('.theme-toggle');
     const savedTheme = localStorage.getItem('theme');
 
@@ -107,10 +106,10 @@ function initGlobalScripts() {
     }
 
     themeToggle.addEventListener('click', () => {
-        // 1. Changement de classe
+        // 1. Basculer le thème
         body.classList.toggle('dark-mode');
         
-        // 2. Icône
+        // 2. Changer l'icône
         if(body.classList.contains('dark-mode')){
             themeToggle.textContent = '☀️';
             localStorage.setItem('theme', 'dark');
@@ -119,18 +118,25 @@ function initGlobalScripts() {
             localStorage.setItem('theme', 'light');
         }
 
-        /* --- LE FIX iOS ULTIME --- */
-        // On ajoute une classe temporaire 'switching' au body
-        document.body.classList.add('switching-theme');
+        // 3. --- LE CORRECTIF "SCROLL HACK" ---
+        // C'est la seule méthode fiable pour corriger le bug de texture sur iOS.
+        // On force le navigateur à redessiner la zone visible en simulant un micro-scroll.
+        
+        // On cache/réaffiche le fond brutalement
+        const bg = document.querySelector('.background-container');
+        if (bg) {
+            bg.style.display = 'none';
+            bg.offsetHeight; // Force le recalcul
+            bg.style.display = 'block';
+        }
 
-        // On force le navigateur à recalculer (Reflow)
-        void document.body.offsetWidth;
-
-        // Après 50ms, on enlève la classe. 
-        // Cela force le navigateur à ré-appliquer le flou sur le nouveau fond.
+        // On simule le scroll de l'utilisateur (1px bas, 1px haut)
         setTimeout(() => {
-            document.body.classList.remove('switching-theme');
-        }, 50);
+            window.scrollBy(0, 1);
+            setTimeout(() => {
+                window.scrollBy(0, -1);
+            }, 50); // Petit délai pour laisser le temps au moteur de rendu de comprendre
+        }, 10);
     });
 
     /* NOTCH FOOTER & SCROLL REVEAL */
