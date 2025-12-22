@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 0. BACKGROUND INJECTION --- */
+    /* --- 0. BACKGROUND INJECTION (AUTOMATIQUE) --- */
     if (!document.querySelector('.background-container')) {
         const backgroundHTML = `
         <div class="background-container">
@@ -96,7 +96,7 @@ function initGlobalScripts() {
         });
     });
 
-    /* DARK MODE TOGGLE (AVEC SCROLL HACK ANTI-GLITCH) */
+    /* DARK MODE TOGGLE (CORRECTIF TEXTURE iOS) */
     const themeToggle = document.querySelector('.theme-toggle');
     const savedTheme = localStorage.getItem('theme');
 
@@ -106,10 +106,10 @@ function initGlobalScripts() {
     }
 
     themeToggle.addEventListener('click', () => {
-        // 1. Basculer le thème
+        // 1. Changement du thème
         body.classList.toggle('dark-mode');
         
-        // 2. Changer l'icône
+        // 2. Gestion icône
         if(body.classList.contains('dark-mode')){
             themeToggle.textContent = '☀️';
             localStorage.setItem('theme', 'dark');
@@ -118,25 +118,22 @@ function initGlobalScripts() {
             localStorage.setItem('theme', 'light');
         }
 
-        // 3. --- LE CORRECTIF "SCROLL HACK" ---
-        // C'est la seule méthode fiable pour corriger le bug de texture sur iOS.
-        // On force le navigateur à redessiner la zone visible en simulant un micro-scroll.
+        // 3. --- LE CORRECTIF TEXTURE ---
+        // On cible TOUS les éléments qui utilisent du verre (glassmorphism)
+        const glassElements = document.querySelectorAll('.card-preview, .comp-card, .timeline-content, .hero-glass-card, .navbar, .notch-footer');
         
-        // On cache/réaffiche le fond brutalement
-        const bg = document.querySelector('.background-container');
-        if (bg) {
-            bg.style.display = 'none';
-            bg.offsetHeight; // Force le recalcul
-            bg.style.display = 'block';
-        }
-
-        // On simule le scroll de l'utilisateur (1px bas, 1px haut)
-        setTimeout(() => {
-            window.scrollBy(0, 1);
-            setTimeout(() => {
-                window.scrollBy(0, -1);
-            }, 50); // Petit délai pour laisser le temps au moteur de rendu de comprendre
-        }, 10);
+        glassElements.forEach(el => {
+            // A. On coupe le flou temporairement
+            el.style.backdropFilter = 'none';
+            el.style.webkitBackdropFilter = 'none'; // Important pour Safari/iOS
+            
+            // B. On force le navigateur à prendre en compte ce changement (Reflow)
+            void el.offsetWidth; 
+            
+            // C. On remet le flou (en enlevant le style inline, le CSS reprend le relais)
+            el.style.backdropFilter = '';
+            el.style.webkitBackdropFilter = '';
+        });
     });
 
     /* NOTCH FOOTER & SCROLL REVEAL */
