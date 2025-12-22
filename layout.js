@@ -1,14 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    /* --- 0. BACKGROUND INJECTION (AUTOMATIQUE) --- */
-    const backgroundHTML = `
-    <div class="background-container">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-    `;
-    document.body.insertAdjacentHTML("afterbegin", backgroundHTML);
+    /* --- 0. BACKGROUND INJECTION (GÉRÉ PAR JS POUR TOUTES LES PAGES) --- */
+    // On vérifie d'abord s'il n'est pas déjà là pour éviter les doublons
+    if (!document.querySelector('.background-container')) {
+        const backgroundHTML = `
+        <div class="background-container">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+        `;
+        document.body.insertAdjacentHTML("afterbegin", backgroundHTML);
+    }
 
     /* --- 1. HEADER INJECTION --- */
     const headerHTML = `
@@ -34,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </nav>
     `;
-    document.body.insertAdjacentHTML("beforeend", headerHTML); 
+    document.body.insertAdjacentHTML("beforeend", headerHTML);
 
     /* --- 2. FOOTER INJECTION --- */
     const footerHTML = `
@@ -94,7 +97,7 @@ function initGlobalScripts() {
         });
     });
 
-    /* DARK MODE TOGGLE (AVEC CORRECTIF "NUCLEAR" ANTI-GLITCH) */
+    /* DARK MODE TOGGLE (METHODE "FLASH" ANTI-GLITCH) */
     const themeToggle = document.querySelector('.theme-toggle');
     const savedTheme = localStorage.getItem('theme');
 
@@ -104,8 +107,10 @@ function initGlobalScripts() {
     }
 
     themeToggle.addEventListener('click', () => {
+        // 1. Changement de classe
         body.classList.toggle('dark-mode');
         
+        // 2. Icône
         if(body.classList.contains('dark-mode')){
             themeToggle.textContent = '☀️';
             localStorage.setItem('theme', 'dark');
@@ -114,29 +119,18 @@ function initGlobalScripts() {
             localStorage.setItem('theme', 'light');
         }
 
-        /* --- LE CORRECTIF COMPLET --- */
-        
-        // 1. On réveille le fond (comme avant)
-        const bg = document.querySelector('.background-container');
-        if (bg) {
-            bg.style.display = 'none';
-            bg.offsetHeight; // Force le calcul
-            bg.style.display = 'block';
-        }
+        /* --- LE FIX iOS ULTIME --- */
+        // On ajoute une classe temporaire 'switching' au body
+        document.body.classList.add('switching-theme');
 
-        // 2. NOUVEAU : On réveille TOUTES les cartes de verre présentes sur la page
-        // On sélectionne tout ce qui ressemble à une carte vitrée
-        const glassElements = document.querySelectorAll('.card-preview, .comp-card, .timeline-content, .hero-glass-card, .navbar');
-        
-        glassElements.forEach(el => {
-            // Petite astuce invisible : on change une propriété infime pour forcer le GPU à redessiner la carte
-            el.style.transform = "translate3d(0,0,0) scale(1.0001)";
-            
-            // On remet normal juste après (tellement vite que c'est invisible à l'oeil nu)
-            setTimeout(() => {
-                el.style.transform = "translate3d(0,0,0) scale(1)";
-            }, 50);
-        });
+        // On force le navigateur à recalculer (Reflow)
+        void document.body.offsetWidth;
+
+        // Après 50ms, on enlève la classe. 
+        // Cela force le navigateur à ré-appliquer le flou sur le nouveau fond.
+        setTimeout(() => {
+            document.body.classList.remove('switching-theme');
+        }, 50);
     });
 
     /* NOTCH FOOTER & SCROLL REVEAL */
