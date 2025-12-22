@@ -124,9 +124,9 @@ function initGlobalScripts() {
             bg.style.display = 'block';
         }
 
-        // 2. NOUVEAU : On réveille TOUTES les cartes de verre présentes sur la page
+// 2. NOUVEAU : On réveille TOUTES les cartes de verre présentes sur la page
         // On sélectionne tout ce qui ressemble à une carte vitrée
-        const glassElements = document.querySelectorAll('.card-preview, .comp-card, .timeline-content, .hero-glass-card, .navbar');
+        const glassElements = document.querySelectorAll('.card-preview, .comp-card, .timeline-content, .hero-glass-card, .navbar, .notch-footer, .timeline-item');
         
         glassElements.forEach(el => {
             // Petite astuce invisible : on change une propriété infime pour forcer le GPU à redessiner la carte
@@ -135,6 +135,14 @@ function initGlobalScripts() {
             // On remet normal juste après (tellement vite que c'est invisible à l'oeil nu)
             setTimeout(() => {
                 el.style.transform = "translate3d(0,0,0) scale(1)";
+            }, 50);
+        });
+        
+        // 3. BONUS : On force aussi le recalcul des blobs du fond
+        document.querySelectorAll('.blob').forEach(blob => {
+            blob.style.opacity = '0.99';
+            setTimeout(() => {
+                blob.style.opacity = '1';
             }, 50);
         });
     });

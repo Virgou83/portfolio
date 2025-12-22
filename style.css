@@ -57,7 +57,7 @@ html {
     scroll-behavior: smooth; 
     overflow-x: hidden; 
     /* Marge de sécurité standard pour la navigation */
-    scroll-padding-top: 100px; 
+    scroll-padding-top: 50px; 
 }
 
 body { 
@@ -73,7 +73,7 @@ body {
 
 /* MARGE DE SCROLL POUR LES SECTIONS (MOBILE FRIENDLY) */
 section {
-    scroll-margin-top: 90px;
+    scroll-margin-top: -50px;
 }
 
 /* ==========================================================================
