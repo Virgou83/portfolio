@@ -38,7 +38,7 @@
 html { 
     scroll-behavior: smooth; 
     overflow-x: hidden; 
-    scroll-padding-top: 100px; 
+    scroll-padding-top: 50px; 
 }
 
 body { 
@@ -52,7 +52,7 @@ body {
 }
 
 section {
-    scroll-margin-top: 90px;
+    scroll-margin-top: -50px;
 }
 
 /* ==========================================================================
