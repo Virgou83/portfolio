@@ -1,11 +1,11 @@
 /* ==========================================================================
-   Fichier: style.css - VERSION CLEAN (SANS DARK MODE & CONTRASTE FIXÉ)
+   Fichier: style.css - VERSION FINAL (Shine + Mobile Fix + Contraste)
    ========================================================================== */
 
 /* 1. IMPORTATION DES POLICES */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;600&display=swap');
 
-/* --- DÉFINITION DES VARIABLES (UNIQUEMENT MODE CLAIR) --- */
+/* --- DÉFINITION DES VARIABLES --- */
 :root {
     /* TYPOGRAPHIE */
     --font-brand: 'Cinzel', serif;          
@@ -38,7 +38,7 @@
 html { 
     scroll-behavior: smooth; 
     overflow-x: hidden; 
-    scroll-padding-top: 80px; 
+    scroll-padding-top: 80px; /* Ajustement général */
 }
 
 body { 
@@ -51,8 +51,6 @@ body {
     overflow-x: hidden;
 }
 
-section {}
-
 /* ==========================================================================
    2. FOND ANIMÉ & ANTI-GLITCH
    ========================================================================== */
@@ -61,7 +59,6 @@ section {}
     z-index: -1; overflow: hidden; pointer-events: none; 
 }
 
-/* Force GPU pour éviter les glitchs */
 .background-container, .blob, .hero-glass-card, .card-preview,
 .comp-card, .timeline-content, .notch-footer, .navbar {
     transform: translate3d(0, 0, 0);
@@ -89,7 +86,7 @@ section {}
 }
 
 /* ==========================================================================
-   3. NAVIGATION (DESKTOP)
+   3. NAVIGATION
    ========================================================================== */
 .navbar { 
     background: var(--nav-bg);
@@ -133,7 +130,7 @@ h1, h2, h3, .section-title, .timeline-date {
 .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-blue); margin: 0.5rem auto 0; border-radius: 2px; }
 
 /* ==========================================================================
-   4. HERO : MONOLITHE DE VERRE
+   4. HERO
    ========================================================================== */
 .hero {
     min-height: 100vh; 
@@ -159,22 +156,9 @@ h1, h2, h3, .section-title, .timeline-date {
 @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
 .hero-content { width: 100%; }
-
-.hero h1 { 
-    font-family: var(--font-title); font-size: 4rem; 
-    color: var(--primary-blue); margin-bottom: 0.5rem; 
-    line-height: 1.1 !important; font-style: italic; padding-top: 5px;
-}
-
-.hero-subtitle {
-    font-family: var(--font-brand); font-size: 0.9rem;
-    color: var(--accent-blue); text-transform: uppercase;
-    letter-spacing: 3px; margin-bottom: 1.5rem; font-weight: 700;
-}
-.hero p { 
-    font-family: var(--font-body); font-weight: 400; color: var(--text-main); 
-    font-size: 1.1rem; max-width: 500px; margin: 0 auto 2.5rem auto; 
-}
+.hero h1 { font-family: var(--font-title); font-size: 4rem; color: var(--primary-blue); margin-bottom: 0.5rem; line-height: 1.1 !important; font-style: italic; padding-top: 5px; }
+.hero-subtitle { font-family: var(--font-brand); font-size: 0.9rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1.5rem; font-weight: 700; }
+.hero p { font-family: var(--font-body); font-weight: 400; color: var(--text-main); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2.5rem auto; }
 
 /* ==========================================================================
    5. CARTES & CONTENU
@@ -197,54 +181,70 @@ h1, h2, h3, .section-title, .timeline-date {
 
 .card-preview h3, .card-preview p, .card-preview a { position: relative; z-index: 2; }
 
-/* IMAGES */
-.profile-img {
-    width: 280px; height: 280px; object-fit: cover;
-    border-radius: 50%; border: 5px solid rgba(255,255,255,0.5);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    animation: subtleFloat 5s ease-in-out infinite alternate;
-}
+/* IMAGES & GRILLES */
+.profile-img { width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 5px solid rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); animation: subtleFloat 5s ease-in-out infinite alternate; }
 .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; align-items: center; }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 
-/* BOUTONS */
+/* ==========================================================================
+   6. BOUTONS & EFFET SHINE ✨
+   ========================================================================== */
 .btn-main, .link-arrow {
-    font-family: var(--font-body); position: relative; overflow: hidden; display: inline-block; 
+    font-family: var(--font-body); 
+    position: relative; 
+    overflow: hidden; /* Important pour que le shine ne dépasse pas */
+    display: inline-block; 
     padding: 0.9rem 2rem; text-decoration: none; border-radius: 50px; font-weight: 600; 
-    transition: all 0.3s ease; z-index: 11; cursor: pointer; border: 2px solid transparent; 
+    transition: all 0.3s ease; 
+    z-index: 11; cursor: pointer; border: 2px solid transparent; 
     background: var(--accent-blue); color: #ffffff !important;
     box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
-.btn-main:hover, .link-arrow:hover { 
-    background-color: var(--primary-blue); transform: translateY(-3px); 
-}
 .link-arrow { padding: 0.6rem 1.5rem; }
 
+/* Définition de la barre lumineuse (invisible par défaut) */
+.btn-main::after, .link-arrow::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%; /* Hors du bouton à gauche */
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-25deg);
+    transition: none; /* Pas de transition pour le retour */
+}
+
+/* L'animation au survol */
+.btn-main:hover, .link-arrow:hover { 
+    background-color: var(--primary-blue); 
+    transform: translateY(-3px); 
+}
+
+.btn-main:hover::after, .link-arrow:hover::after {
+    animation: shine 0.75s; /* Lance l'animation */
+}
+
+@keyframes shine {
+    100% {
+        left: 200%; /* Traverse vers la droite */
+    }
+}
+
 /* ==========================================================================
-   6. FOOTER & TIMELINE (CORRECTION CONTRASTE ICI)
+   7. FOOTER & TIMELINE
    ========================================================================== */
 .timeline-container { max-width: 800px; margin: 0 auto; position: relative; padding: 2rem 0; }
 .timeline-container::before { content: ''; position: absolute; top: 0; bottom: 0; left: 20px; width: 3px; background: rgba(27, 58, 110, 0.1); border-radius: 2px; }
-
 .timeline-item { position: relative; margin-bottom: 3rem; padding-left: 60px; }
 .timeline-item::after { content: ''; position: absolute; left: 11px; top: 0; width: 20px; height: 20px; background: var(--accent-blue); border: 4px solid var(--bg-color); border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
-/* CORRECTION CONTRASTE TITRES PARCOURS */
-.timeline-date { 
-    display: inline-block; font-size: 0.95rem; font-weight: 700; 
-    color: #0f4c81; /* Bleu plus foncé pour meilleure lecture */
-    text-transform: uppercase; margin-bottom: 0.5rem; 
-}
+/* CONTRASTE TITRES PARCOURS */
+.timeline-date { display: inline-block; font-size: 0.95rem; font-weight: 700; color: #0f4c81; text-transform: uppercase; margin-bottom: 0.5rem; }
 .timeline-content { border-left: 4px solid var(--primary-blue); }
+.timeline-content h3 { color: #0a1e36 !important; font-weight: 700; } /* Noir bleuté */
 
-/* Force la couleur du titre H3 dans la timeline à être quasi noire */
-.timeline-content h3 {
-    color: #0a1e36 !important; /* Bleu nuit très très sombre */
-    font-weight: 700;
-}
-
-/* Compétences Grid */
 .ac-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
 .ac-code { font-weight: 800; color: var(--accent-blue); min-width: 75px; }
 
@@ -272,37 +272,22 @@ h1, h2, h3, .section-title, .timeline-date {
 .info-link-small.highlight:hover { background: var(--accent-blue); color: white; }
 
 /* ==========================================================================
-   7. MEDIA QUERIES & BURGER MENU (MOBILE)
+   8. MEDIA QUERIES & MOBILE FIX
    ========================================================================== */
 .burger { display: none; cursor: pointer; }
 .burger div { width: 22px; height: 2px; background-color: var(--text-main); margin: 5px; transition: all 0.3s ease; border-radius: 10px; }
 
 @media screen and (max-width: 768px) {
-    /* --- NOUVEAUX REGLAGES POUR REMONTER LA SECTION --- */
-    html {
-        /* On arrête le scroll pile à 70px (hauteur de la navbar) + 5px de marge */
-        scroll-padding-top: 75px; 
-    }
-
-    section {
-        /* On réduit l'espace vide en haut de chaque section sur mobile */
-        padding-top: 3rem; 
-        padding-bottom: 3rem;
-    }
-
-    #presentation {
-        /* Pour la présentation spécifiquement, on réduit encore plus l'espace
-           au-dessus de la photo pour qu'elle soit bien haute */
-        padding-top: 1rem; 
-    }
-    /* -------------------------------------------------- */
-
+    /* --- FIX POSITION SCROLL MOBILE --- */
+    html { scroll-padding-top: 75px; } /* Arrêt pile sous la navbar */
+    section { padding-top: 3rem; padding-bottom: 3rem; }
+    #presentation { padding-top: 1rem; } /* Remonte la tête au maximum */
+    
     .hero { min-height: 100svh; padding-top: 0; }
     .hero h1 { font-size: 3rem; }
     .hero-subtitle { font-size: 0.8rem; letter-spacing: 2px; }
     .hero-glass-card { padding: 2rem 1.5rem; margin-top: -50px; }
 
-    /* BURGER MENU STYLES */
     .burger { display: block; z-index: 10002; }
     .nav-links { 
         position: fixed; right: 0; top: 70px; 
