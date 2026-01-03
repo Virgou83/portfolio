@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fichier: style.css - VERSION FINALE & COMPLETE (V. SANCHEZ)
+   Fichier: style.css - VERSION FINALE (Fix IOS + Projets + Menu Opaque)
    ========================================================================== */
 
 /* 1. IMPORTATION DES POLICES */
@@ -51,7 +51,9 @@ body {
     overflow-x: hidden;
 }
 
-/* 2. FOND ANIMÉ & ANTI-GLITCH */
+/* ==========================================================================
+   2. FOND ANIMÉ & ANTI-GLITCH
+   ========================================================================== */
 .background-container {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: -1; overflow: hidden; pointer-events: none; 
@@ -62,6 +64,8 @@ body {
 .comp-card, .timeline-content, .notch-footer, .navbar, .project-card {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
     will-change: transform;
 }
 
@@ -82,7 +86,9 @@ body {
     100% { transform: translate(0, 0) scale(1) rotate(360deg); }
 }
 
-/* 3. NAVIGATION */
+/* ==========================================================================
+   3. NAVIGATION
+   ========================================================================== */
 .navbar { 
     background: var(--nav-bg);
     backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -298,11 +304,12 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .info-link-small.highlight { border-color: var(--accent-blue); color: var(--accent-blue); }
 .info-link-small.highlight:hover { background: var(--accent-blue); color: white; }
 
+
 /* 11. MEDIA QUERIES & MOBILE FIX */
 .burger { display: none; cursor: pointer; }
 .burger div { width: 22px; height: 2px; background-color: var(--text-main); margin: 5px; transition: all 0.3s ease; border-radius: 10px; }
 
-/* AJOUT : Bloque le scroll physique quand le menu est ouvert */
+/* FIX MOBILE SCROLL */
 body.no-scroll { overflow: hidden !important; position: fixed; width: 100%; }
 
 @media screen and (max-width: 768px) {
@@ -337,7 +344,7 @@ body.no-scroll { overflow: hidden !important; position: fixed; width: 100%; }
     .burger { display: block; z-index: 10002; }
     .nav-links { 
         position: fixed; right: 0; top: 70px; height: calc(100vh - 70px); 
-        /* MODIFICATION : FOND OPAQUE */
+        /* FOND OPAQUE POUR CACHER LE RESTE */
         background: var(--bg-color); backdrop-filter: none; 
         display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
         padding-top: 2rem; gap: 1.5rem; width: 100%; 
