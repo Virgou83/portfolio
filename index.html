@@ -8,11 +8,7 @@
 </head>
 <body>
 
-<div class="background-container">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
+<div class="background-container"></div>
 
 <section class="hero" id="accueil">
     <div class="hero-glass-card">
@@ -35,7 +31,7 @@
                     <div class="card-preview">
                         <h2 class="section-title" style="text-align: left; margin-bottom: 1.5rem;">Qui suis-je ?</h2>
                         <p><strong>Bonjour, je suis Virgile Sanchez.</strong></p>
-                        <p>Actuellement étudiant à l'IUT de Gap, j'ai choisi de me spécialiser dans le parcours GC2F. Mon objectif est de développer une expertise solide dans les domaines de l'audit et du contrôle de gestion.</p>
+                        <p>Actuellement étudiant à l'IUT de Gap, j'ai choisi de me spécialiser dans le parcours GC2F. Mon objectif est de me diriger vers le <strong>secteur bancaire</strong>, et plus particulièrement dans les services dédiés aux <strong>entreprises</strong>.</p>
                         <p>Curieux et rigoureux, j'aime comprendre les mécanismes financiers qui permettent aux entreprises de se développer.</p>
                         <br>
                         <a href="presentation.html" class="link-arrow">Lire ma présentation complète &rarr;</a>
@@ -91,7 +87,7 @@
         </div>
     </section>
 
-<section id="competences">
+    <section id="competences">
         <div class="container reveal">
             <h2 class="section-title">Mes Compétences</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 3rem auto; color: var(--text-dark);">
@@ -131,9 +127,6 @@
 
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
-                    // C'EST ICI LE SECRET :
-                    // Mobile -> 'start' (Aligne le haut de la section en haut de l'écran = On voit ta tête)
-                    // PC -> 'center' (Aligne le milieu de la section au milieu de l'écran = Esthétique)
                     block: isMobile ? 'start' : 'center'
                 });
             }
