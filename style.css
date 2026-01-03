@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fichier: style.css - VERSION PROJETS (Avec boutons PDF & Structure Années)
+   Fichier: style.css - VERSION FINALE & COMPLETE (V. SANCHEZ)
    ========================================================================== */
 
 /* 1. IMPORTATION DES POLICES */
@@ -51,20 +51,17 @@ body {
     overflow-x: hidden;
 }
 
-/* ==========================================================================
-   2. FOND ANIMÉ & ANTI-GLITCH
-   ========================================================================== */
+/* 2. FOND ANIMÉ & ANTI-GLITCH */
 .background-container {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: -1; overflow: hidden; pointer-events: none; 
 }
 
+/* Force GPU pour fluidité */
 .background-container, .blob, .hero-glass-card, .card-preview,
 .comp-card, .timeline-content, .notch-footer, .navbar, .project-card {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     will-change: transform;
 }
 
@@ -79,15 +76,13 @@ body {
 .blob-3 { top: 30%; left: 20%; width: 35vw; height: 35vw; background: var(--blob-3); animation-delay: -10s; }
 
 @keyframes float {
-    0% { transform: translate(0, 0) scale(1) rotate(0deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    33% { transform: translate(30px, -50px) scale(1.1) rotate(120deg); border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
-    66% { transform: translate(-20px, 20px) scale(0.9) rotate(240deg); border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
-    100% { transform: translate(0, 0) scale(1) rotate(360deg); border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(30px, -50px) scale(1.1) rotate(120deg); }
+    66% { transform: translate(-20px, 20px) scale(0.9) rotate(240deg); }
+    100% { transform: translate(0, 0) scale(1) rotate(360deg); }
 }
 
-/* ==========================================================================
-   3. NAVIGATION
-   ========================================================================== */
+/* 3. NAVIGATION */
 .navbar { 
     background: var(--nav-bg);
     backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
@@ -115,12 +110,11 @@ body {
 }
 .nav-links a:hover, .nav-links a.active { color: var(--accent-blue); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
 
-/* STRUCTURE */
+/* 4. STRUCTURE & TITRES */
 .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; width: 100%; }
 section { padding: 5rem 0; }
 .page-header { padding-top: 130px; padding-bottom: 2rem; text-align: center; }
 
-/* TITRES */
 h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title { 
     font-family: var(--font-title); color: var(--primary-blue); 
     line-height: 1.3 !important; padding-top: 5px; padding-bottom: 5px;
@@ -129,15 +123,11 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .section-title { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; position: relative; padding-bottom: 0.8rem; }
 .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-blue); margin: 0.5rem auto 0; border-radius: 2px; }
 
-/* ==========================================================================
-   4. HERO
-   ========================================================================== */
+/* 5. HERO SECTION */
 .hero {
-    min-height: 100vh; 
-    background: transparent; 
+    min-height: 100vh; background: transparent; 
     display: flex; align-items: center; justify-content: center; text-align: center;
-    position: relative; overflow: visible; 
-    padding: 70px 1rem 0 1rem; margin-top: 0;
+    position: relative; padding: 70px 1rem 0 1rem; margin-top: 0;
 }
 
 .hero-glass-card {
@@ -145,30 +135,24 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.8);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1); 
-    border-radius: 30px;
-    padding: 3rem 2rem;
-    max-width: 700px; width: 100%;
-    position: relative; z-index: 10;
-    opacity: 0; transform: translateY(30px);
-    animation: fadeInUp 1s ease-out forwards;
+    border-radius: 30px; padding: 3rem 2rem;
+    max-width: 700px; width: 100%; position: relative; z-index: 10;
+    opacity: 0; transform: translateY(30px); animation: fadeInUp 1s ease-out forwards;
 }
 
 @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
 .hero-content { width: 100%; }
-.hero h1 { font-family: var(--font-title); font-size: 4rem; color: var(--primary-blue); margin-bottom: 0.5rem; line-height: 1.1 !important; font-style: italic; padding-top: 5px; }
+.hero h1 { font-family: var(--font-title); font-size: 4rem; color: var(--primary-blue); margin-bottom: 0.5rem; line-height: 1.1 !important; font-style: italic; }
 .hero-subtitle { font-family: var(--font-brand); font-size: 0.9rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1.5rem; font-weight: 700; }
 .hero p { font-family: var(--font-body); font-weight: 400; color: var(--text-main); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2.5rem auto; }
 
-/* ==========================================================================
-   5. CARTES & CONTENU
-   ========================================================================== */
+/* 6. CARTES GÉNÉRALES */
 .card-preview, .comp-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 2rem;
-    position: relative; overflow: hidden; 
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    position: relative; overflow: hidden; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
     transition: all 0.4s ease;
 }
 
@@ -188,31 +172,17 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .ac-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
 .ac-code { font-weight: 800; color: var(--accent-blue); min-width: 75px; }
 
-/* ==========================================================================
-   6. BOUTONS & EFFET SHINE ✨
-   ========================================================================== */
+/* 7. BOUTONS & EFFET SHINE ✨ */
 .btn-main, .link-arrow, .btn-small {
-    font-family: var(--font-body); 
-    position: relative; 
-    overflow: hidden; 
-    display: inline-block; 
+    font-family: var(--font-body); position: relative; overflow: hidden; display: inline-block; 
     padding: 0.9rem 2rem; text-decoration: none; border-radius: 50px; font-weight: 600; 
-    transition: all 0.3s ease; 
-    z-index: 11; cursor: pointer; border: 2px solid transparent; 
+    transition: all 0.3s ease; z-index: 11; cursor: pointer; border: 2px solid transparent; 
     background: var(--accent-blue); color: #ffffff !important;
     box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
 .link-arrow { padding: 0.6rem 1.5rem; }
-
-/* Nouveau style pour les boutons des projets */
-.btn-small { 
-    padding: 0.6rem 1.2rem; 
-    font-size: 0.85rem; 
-    margin-top: 1.5rem; 
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
+.btn-small { padding: 0.6rem 1.2rem; font-size: 0.85rem; margin-top: 1.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
 .btn-main::after, .link-arrow::after, .btn-small::after {
     content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
@@ -225,9 +195,7 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 
 @keyframes shine { 100% { left: 200%; } }
 
-/* ==========================================================================
-   7. TIMELINE AUDACIEUSE (Zig-Zag XXL)
-   ========================================================================== */
+/* 8. TIMELINE AUDACIEUSE (Zig-Zag XXL) */
 .timeline-container { max-width: 90%; width: 1600px; margin: 0 auto; position: relative; padding: 4rem 0; }
 
 .timeline-container::before {
@@ -274,106 +242,40 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .timeline-content ul { padding-left: 1rem; margin: 0; font-size: 1.05rem; }
 .timeline-content li { margin-bottom: 5px; }
 
-/* ==========================================================================
-   9. PAGE PROJETS (STYLE SPÉCIFIQUE)
-   ========================================================================== */
-.year-title {
-    font-size: 2rem; color: var(--primary-blue);
-    text-align: left; margin-bottom: 0.5rem;
-    font-weight: 400;
-}
+/* 9. PAGE PROJETS (STYLE SPÉCIFIQUE) */
+.year-title { font-size: 2rem; color: var(--primary-blue); text-align: left; margin-bottom: 0.5rem; font-weight: 400; }
+.year-separator { width: 100%; height: 2px; background: linear-gradient(to right, var(--accent-blue), transparent); margin-bottom: 2rem; }
+.semester-title { font-size: 1.4rem; color: var(--darker-blue); margin-bottom: 1.5rem; border-left: 4px solid var(--accent-blue); padding-left: 15px; margin-top: 1rem; }
 
-.year-separator {
-    width: 100%; height: 2px;
-    background: linear-gradient(to right, var(--accent-blue), transparent);
-    margin-bottom: 2rem;
-}
-
-.semester-title {
-    font-size: 1.4rem; color: var(--darker-blue);
-    margin-bottom: 1.5rem; border-left: 4px solid var(--accent-blue);
-    padding-left: 15px; margin-top: 1rem;
-}
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2.5rem;
-    padding-bottom: 2rem;
-}
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; padding-bottom: 2rem; }
 
 .project-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 25px;
-    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 25px; padding: 2.5rem;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    display: flex; flex-direction: column;
-    height: 100%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; height: 100%;
 }
 
 .project-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(79, 172, 254, 0.2);
-    border-color: var(--accent-blue);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+    transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(79, 172, 254, 0.2);
+    border-color: var(--accent-blue); background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
 }
 
-.project-header {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 1.5rem;
-}
-
-.project-icon {
-    font-size: 3rem;
-    background: white;
-    width: 70px; height: 70px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
+.project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem; }
+.project-icon { font-size: 3rem; background: white; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 .project-tags { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
+.tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; background: rgba(79, 172, 254, 0.1); color: var(--primary-blue); border: 1px solid rgba(79, 172, 254, 0.2); }
 
-.tag {
-    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    padding: 4px 10px; border-radius: 20px;
-    background: rgba(79, 172, 254, 0.1); color: var(--primary-blue);
-    border: 1px solid rgba(79, 172, 254, 0.2);
-}
+.project-body h3 { font-size: 1.5rem; color: #0a1e36; margin-bottom: 0.5rem; font-weight: 700; }
+.project-role { font-size: 0.9rem; color: var(--accent-blue); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+.project-desc { color: var(--text-main); margin-bottom: 1.5rem; flex-grow: 1; }
 
-.project-body h3 {
-    font-size: 1.5rem; color: #0a1e36; margin-bottom: 0.5rem; font-weight: 700;
-}
-
-.project-role {
-    font-size: 0.9rem; color: var(--accent-blue); font-weight: 600;
-    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem;
-}
-
-.project-desc {
-    color: var(--text-main); margin-bottom: 1.5rem; flex-grow: 1;
-}
-
-.project-details {
-    list-style: none; padding: 0; margin-bottom: 1rem;
-    border-top: 1px solid rgba(0,0,0,0.05); padding-top: 1rem;
-}
-
-.project-details li {
-    margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--text-light);
-    display: flex; align-items: flex-start;
-}
-
+.project-details { list-style: none; padding: 0; margin-bottom: 1rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 1rem; }
+.project-details li { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--text-light); display: flex; align-items: flex-start; }
 .project-details li strong { color: var(--primary-blue); margin-right: 5px; }
 
-
-/* ==========================================================================
-   10. FOOTER & MEDIA QUERIES (Mobile)
-   ========================================================================== */
-/* Notch Footer */
+/* 10. NOTCH FOOTER */
 .notch-footer { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 9998; width: 110px; height: 40px; background: var(--footer-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); overflow: hidden; color: var(--footer-text); cursor: pointer; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .notch-footer:hover, .notch-footer.active { width: 480px; height: 160px; border-radius: 25px; bottom: 25px; background: rgba(15, 23, 42, 0.98); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); }
 .notch-trigger { display: flex; align-items: center; justify-content: center; height: 40px; width: 100%; position: absolute; top: 0; left: 0; transition: opacity 0.2s ease-out; }
@@ -396,10 +298,12 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .info-link-small.highlight { border-color: var(--accent-blue); color: var(--accent-blue); }
 .info-link-small.highlight:hover { background: var(--accent-blue); color: white; }
 
-
-/* MOBILE RESPONSIVE & BURGER */
+/* 11. MEDIA QUERIES & MOBILE FIX */
 .burger { display: none; cursor: pointer; }
 .burger div { width: 22px; height: 2px; background-color: var(--text-main); margin: 5px; transition: all 0.3s ease; border-radius: 10px; }
+
+/* AJOUT : Bloque le scroll physique quand le menu est ouvert */
+body.no-scroll { overflow: hidden !important; position: fixed; width: 100%; }
 
 @media screen and (max-width: 768px) {
     /* --- FIX POSITION SCROLL MOBILE --- */
@@ -429,17 +333,15 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
     .project-card { padding: 1.5rem; }
     .year-title { font-size: 1.6rem; }
 
-    /* Burger Menu */
+    /* Burger Menu Styles */
     .burger { display: block; z-index: 10002; }
     .nav-links { 
-        position: fixed; right: 0; top: 70px; 
-        height: calc(100vh - 70px); 
-        background: var(--nav-bg); 
-        backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+        position: fixed; right: 0; top: 70px; height: calc(100vh - 70px); 
+        /* MODIFICATION : FOND OPAQUE */
+        background: var(--bg-color); backdrop-filter: none; 
         display: flex; flex-direction: column; align-items: center; justify-content: flex-start; 
         padding-top: 2rem; gap: 1.5rem; width: 100%; 
-        transform: translateX(100%); 
-        transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
+        transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1); 
         box-shadow: -5px 10px 15px rgba(0,0,0,0.05); 
     }
     .nav-links.nav-active { transform: translateX(0%); }
