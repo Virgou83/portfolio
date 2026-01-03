@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
     document.body.insertAdjacentHTML("afterbegin", backgroundHTML);
 
-    /* --- 1. HEADER INJECTION (SANS BOUTON DARK MODE) --- */
+    /* --- 1. HEADER INJECTION --- */
     const headerHTML = `
     <nav class="navbar">
         <div class="nav-container">

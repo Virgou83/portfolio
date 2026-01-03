@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fichier: style.css - VERSION FINALE (Fix IOS + Projets + Menu Opaque)
+   Fichier: style.css
    ========================================================================== */
 
 /* 1. IMPORTATION DES POLICES */
@@ -178,7 +178,7 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .ac-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
 .ac-code { font-weight: 800; color: var(--accent-blue); min-width: 75px; }
 
-/* 7. BOUTONS & EFFET SHINE ✨ */
+/* 7. BOUTONS & EFFET SHINE  */
 .btn-main, .link-arrow, .btn-small {
     font-family: var(--font-body); position: relative; overflow: hidden; display: inline-block; 
     padding: 0.9rem 2rem; text-decoration: none; border-radius: 50px; font-weight: 600; 
@@ -201,7 +201,7 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 
 @keyframes shine { 100% { left: 200%; } }
 
-/* 8. TIMELINE AUDACIEUSE (Zig-Zag XXL) */
+/* 8. TIMELINE */
 .timeline-container { max-width: 90%; width: 1600px; margin: 0 auto; position: relative; padding: 4rem 0; }
 
 .timeline-container::before {
