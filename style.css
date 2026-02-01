@@ -107,31 +107,41 @@ body {
 
 .nav-right { display: flex; align-items: center; gap: 25px; }
 
-/* --- ÎLOT GAUCHE : LOGO --- */
+/* --- ÎLOT GAUCHE : LOGO (Icone + Nom) --- */
 .logo { 
-    font-family: var(--font-brand); font-size: 1.2rem; font-weight: 700;
-    text-decoration: none; color: var(--primary-blue); 
-    text-transform: uppercase; letter-spacing: 1px;
-    z-index: 10002; display: inline-block; line-height: 1.6;
+    /* Disposition Flex pour aligner image et texte */
+    display: flex; align-items: center; gap: 12px;
     
-    /* MODIFICATION ICI : Fond très transparent (0.2) mais fort flou (20px) */
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    text-decoration: none; 
+    z-index: 10002; padding: 8px 20px;
     
-    /* Bordure très fine et discrète pour délimiter la forme */
+    /* FOND : Très transparent pour la distinction */
+    background: rgba(255, 255, 255, 0.15); 
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    
+    /* FORME : Un arrondi "carte" plus carré pour trancher avec les boutons ronds */
+    border-radius: 16px; 
+    
+    /* BORDURES : Fine bordure blanche */
     border: 1px solid rgba(255, 255, 255, 0.3);
     
-    padding: 8px 20px;
-    border-radius: 30px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02); /* Ombre très légère */
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.logo-icon {
+    width: 32px; height: auto; /* Taille du favicon */
+}
+
+.logo-text {
+    font-family: var(--font-brand); font-size: 1.15rem; font-weight: 700;
+    color: var(--primary-blue); text-transform: uppercase; letter-spacing: 1.5px;
 }
 
 .logo:hover { 
-    /* Au survol, on blanchit un peu pour l'effet interactif */
-    background: rgba(255, 255, 255, 0.4); 
-    transform: translateY(-2px); 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05); 
+    background: rgba(255, 255, 255, 0.5); 
+    transform: translateY(-2px) scale(1.02); 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
 }
 
 /* --- ÎLOT DROITE : MENU --- */
@@ -156,18 +166,41 @@ body {
 
 .nav-links li { padding: 0 15px; } 
 
+/* LIENS DU MENU - BASE */
 .nav-links a { 
     font-family: var(--font-body);
-    color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.9rem; 
-    transition: all 0.2s ease; position: relative;
-    /* Petit ombre portée sur le texte pour garantir la lisibilité si le fond est clair */
+    color: var(--text-main); 
+    text-decoration: none; 
+    font-weight: 600; 
+    font-size: 0.9rem; 
+    transition: all 0.2s ease; 
+    position: relative;
     text-shadow: 0 0 10px rgba(255,255,255,0.8);
 }
-.nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
 
+/* 1. ÉTAT SURVOL (HOVER) -> BLEU CLAIR (Reste comme avant) */
+.nav-links a:hover { 
+    color: var(--accent-blue); 
+}
+
+/* 2. ÉTAT ACTIF (PAGE COURANTE) -> BLEU FONCÉ (Nouveau !) */
+.nav-links a.active { 
+    color: var(--primary-blue); /* Couleur foncée "IUT/Banque" */
+    font-weight: 700; /* On le met un tout petit peu plus gras pour marquer le coup */
+}
+
+/* LE PETIT POINT SOUS LE LIEN ACTIF */
+/* Il doit aussi passer en bleu foncé pour être cohérent */
 .nav-links a.active::after {
-    content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
-    width: 4px; height: 4px; background: var(--accent-blue); border-radius: 50%;
+    content: ''; 
+    position: absolute; 
+    bottom: -4px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 4px; 
+    height: 4px; 
+    background: var(--primary-blue); /* Le point devient foncé aussi */
+    border-radius: 50%;
 }
 
 /* --- MOBILE --- */
@@ -419,7 +452,14 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title, .comp-
    10. NOTCH FOOTER
    ========================================================================== */
 .notch-footer { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 9998; width: 110px; height: 40px; background: var(--footer-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); overflow: hidden; color: var(--footer-text); cursor: pointer; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.notch-footer:hover, .notch-footer.active { width: 480px; height: 160px; border-radius: 25px; bottom: 25px; background: rgba(15, 23, 42, 0.98); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); }
+.notch-footer:hover, .notch-footer.active { 
+    width: 480px; 
+    height: 200px; /* <--- Augmenté pour faire rentrer le téléphone */
+    border-radius: 25px; 
+    bottom: 25px; 
+    background: rgba(15, 23, 42, 0.98); 
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); 
+}
 .notch-trigger { display: flex; align-items: center; justify-content: center; height: 40px; width: 100%; position: absolute; top: 0; left: 0; transition: opacity 0.2s ease-out; }
 .notch-footer:hover .notch-trigger, .notch-footer.active .notch-trigger { opacity: 0; pointer-events: none; }
 .notch-label { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-left: 8px; }
