@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fichier: layout.js - GESTION GLOBALE + INTELLIGENCE DU FOOTER
+   Fichier: layout.js - VERSION STABLE + FIX MOBILE (CLIC CARTES)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,15 +21,15 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.prepend(bgContainer);
     }
 
-    // 1. INJECTION DU HEADER
+    // 1. INJECTION DU HEADER (MENU DE NAVIGATION)
+    // On garde ta version stable "Icone + Nom" qui ne bug pas
     const headerHTML = `
     <nav class="navbar">
         <div class="nav-container">
-
-<a href="index.html" class="logo">
-    <img src="favicon.png" alt="VS Logo" class="logo-icon">
-    <span class="logo-text">Virgile Sanchez</span>
-</a>
+            <a href="index.html" class="logo">
+                <img src="favicon.png" alt="VS Logo" class="logo-icon">
+                <span class="logo-text">Virgile Sanchez</span>
+            </a>
             <div class="nav-right">
                 <ul class="nav-links">
                     <li><a href="index.html">Accueil</a></li>
@@ -120,19 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     reveal();
 
-    // ============================================================
-    // 6. INTELLIGENCE DU NOTCH FOOTER (NOUVEAU)
-    // ============================================================
+    // 6. INTELLIGENCE DU NOTCH FOOTER
     const notch = document.getElementById('notchFooter');
     if (notch) {
-        
-        // A. Clic sur le notch : on ouvre/ferme (avec stopPropagation pour ne pas déclencher le clic document)
+        // Clic sur le notch pour ouvrir/fermer
         notch.addEventListener('click', function(e) {
             e.stopPropagation(); 
             this.classList.toggle('active');
         });
 
-        // B. Clic sur un lien À L'INTÉRIEUR (ex: CV, Tel) : on ferme le notch
+        // Clic sur un lien à l'intérieur -> Ferme le notch
         const notchLinks = notch.querySelectorAll('a');
         notchLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -140,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // C. Clic AILLEURS sur la page : on ferme le notch
+        // Clic n'importe où ailleurs sur la page -> Ferme le notch
         document.addEventListener('click', function(e) {
             if (notch.classList.contains('active')) {
                 // Si l'élément cliqué n'est pas le notch ni un de ses enfants
@@ -150,4 +147,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // ============================================================
+    // 7. GESTION TACTILE DES CARTES (C'EST L'AJOUT IMPORTANT)
+    // ============================================================
+    // Cela permet de cliquer sur les cartes "Projets" et "Compétences" sur mobile pour voir les boutons
+    
+    const cards = document.querySelectorAll('.project-card, .comp-card');
+    
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            
+            // Si l'utilisateur clique sur le lien/bouton à l'intérieur, on ne fait rien (on laisse le lien s'ouvrir)
+            if (e.target.tagName === 'A' || e.target.closest('a')) return;
+
+            // Sinon, c'est qu'il clique sur la carte pour l'ouvrir
+            
+            // 1. On ferme toutes les autres cartes (pour éviter d'en avoir trop d'ouvertes)
+            cards.forEach(c => {
+                if (c !== this) c.classList.remove('mobile-active');
+            });
+
+            // 2. On bascule l'état de la carte actuelle (Ouvrir/Fermer)
+            this.classList.toggle('mobile-active');
+        });
+    });
+
 });

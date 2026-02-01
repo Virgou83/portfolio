@@ -419,34 +419,55 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title, .comp-
 .project-details li, .ac-item { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--text-light); display: flex; align-items: flex-start; }
 .project-details li strong, .ac-code { color: var(--primary-blue); margin-right: 5px; font-weight: 800; min-width: 60px; }
 
-/* ANIMATION DU BOUTON (SLIDE UP) */
+/* ANIMATION DU BOUTON (SLIDE UP) - Compatible Mobile */
 .card-footer-hidden, .comp-footer {
     max-height: 0; opacity: 0; margin-top: 0; overflow: hidden;
     transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
 }
+
+/* CONFIGURATION DU BOUTON (EXISTANT) */
 .btn-small-slide {
-    display: block; width: 100%; text-align: center; background: var(--accent-blue); color: white !important;
-    padding: 0.9rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;
-    position: relative; overflow: hidden;
+    display: block; width: 100%; text-align: center; 
+    background: var(--accent-blue); color: white !important;
+    padding: 0.9rem 1.5rem; border-radius: 50px; 
+    text-decoration: none; font-weight: 700; 
+    text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;
+    
+    position: relative; overflow: hidden; /* Indispensable pour l'effet shine */
+    
     transform: translateY(30px); opacity: 0;
     transition: transform 0.4s ease 0.1s, opacity 0.4s ease 0.1s;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3); /* Petite ombre en plus pour le style */
 }
 
-/* LE BOUTON APPARAIT AU SURVOL */
-.comp-card:hover .card-footer-hidden, .project-card:hover .card-footer-hidden {
-    max-height: 150px; margin-top: 2rem; opacity: 1;
-}
-.comp-card:hover .btn-small-slide, .project-card:hover .btn-small-slide {
-    transform: translateY(0); opacity: 1;
-}
-
+/* === AJOUT : L'EFFET SHINE MANQUANT === */
 .btn-small-slide::after {
     content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    /* Le dégradé blanc transparent qui traverse le bouton */
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
     transform: skewX(-25deg); transition: none;
 }
-.btn-small-slide:hover::after { animation: shine 0.75s; }
-.btn-small-slide:hover { background-color: var(--primary-blue); }
+
+/* DÉCLENCHEUR DE L'ANIMATION AU SURVOL */
+.btn-small-slide:hover {
+    background: var(--primary-blue); /* Devient bleu foncé au survol (cohérence avec les autres) */
+    transform: translateY(0) scale(1.02); /* Petit effet de zoom */
+}
+
+.btn-small-slide:hover::after {
+    animation: shine 0.75s; /* Lance l'animation définie plus haut dans ton CSS */
+}
+
+/* LE BOUTON APPARAIT AU SURVOL (PC) ... OU AU CLIC (MOBILE via .mobile-active) */
+.comp-card:hover .card-footer-hidden, .project-card:hover .card-footer-hidden,
+.comp-card.mobile-active .card-footer-hidden, .project-card.mobile-active .card-footer-hidden {
+    max-height: 150px; margin-top: 2rem; opacity: 1;
+}
+
+.comp-card:hover .btn-small-slide, .project-card:hover .btn-small-slide,
+.comp-card.mobile-active .btn-small-slide, .project-card.mobile-active .btn-small-slide {
+    transform: translateY(0); opacity: 1;
+}
 
 /* ==========================================================================
    10. NOTCH FOOTER
