@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fichier: style.css
+   Fichier: style.css - VERSION "CLEAN BASE" (Restaurée)
    ========================================================================== */
 
 /* 1. IMPORTATION DES POLICES */
@@ -12,7 +12,7 @@
     --font-title: 'DM Serif Display', serif; 
     --font-body: 'Inter', sans-serif;       
 
-    /* COULEURS INTERFACE */
+    /* COULEURS INTERFACE (Tes couleurs d'origine) */
     --primary-blue: #1b3a6e; 
     --accent-blue: #4facfe;  
     --darker-blue: #0f4c81;
@@ -20,7 +20,7 @@
     --text-light: #6c757d;
     --white: #ffffff;
     
-    /* FOND LIQUIDE */
+    /* FOND LIQUIDE (Le fond clair d'origine) */
     --bg-color: #f8f9fa; 
     --blob-1: rgba(79, 172, 254, 0.30);  
     --blob-2: rgba(45, 212, 191, 0.25);  
@@ -52,7 +52,7 @@ body {
 }
 
 /* ==========================================================================
-   2. FOND ANIMÉ & ANTI-GLITCH
+   2. FOND ANIMÉ
    ========================================================================== */
 .background-container {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -64,8 +64,6 @@ body {
 .comp-card, .timeline-content, .notch-footer, .navbar, .project-card {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
     will-change: transform;
 }
 
@@ -87,41 +85,128 @@ body {
 }
 
 /* ==========================================================================
-   3. NAVIGATION
+   3. NAVIGATION - STYLE "ÎLOTS FLOTTANTS" (ULTRA TRANSPARENT)
    ========================================================================== */
 .navbar { 
-    background: var(--nav-bg);
-    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    background: transparent; 
+    backdrop-filter: none;
     position: fixed; top: 0; left: 0; width: 100%; 
-    z-index: 9999; height: 70px; display: flex; align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+    z-index: 9999; height: 80px; 
+    display: flex; align-items: center;
+    border-bottom: none;     
+    box-shadow: none;        
+    padding-top: 10px;       
+    transition: all 0.3s ease;
 }
 
-.nav-container { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+.nav-container { 
+    width: 100%; max-width: 1200px; margin: 0 auto; 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 0 1.5rem; 
+}
+
 .nav-right { display: flex; align-items: center; gap: 25px; }
 
+/* --- ÎLOT GAUCHE : LOGO --- */
 .logo { 
-    font-family: var(--font-brand); font-size: 1.4rem; font-weight: 700;
+    font-family: var(--font-brand); font-size: 1.2rem; font-weight: 700;
     text-decoration: none; color: var(--primary-blue); 
     text-transform: uppercase; letter-spacing: 1px;
-    z-index: 10002; display: inline-block; line-height: 1.6; padding: 5px 0;
+    z-index: 10002; display: inline-block; line-height: 1.6;
+    
+    /* MODIFICATION ICI : Fond très transparent (0.2) mais fort flou (20px) */
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    
+    /* Bordure très fine et discrète pour délimiter la forme */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    padding: 8px 20px;
+    border-radius: 30px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02); /* Ombre très légère */
+    transition: all 0.3s ease;
 }
 
-.nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
+.logo:hover { 
+    /* Au survol, on blanchit un peu pour l'effet interactif */
+    background: rgba(255, 255, 255, 0.4); 
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05); 
+}
+
+/* --- ÎLOT DROITE : MENU --- */
+.nav-links { 
+    display: flex; list-style: none; gap: 1rem; align-items: center;
+    
+    /* MODIFICATION ICI : Même traitement (Glass ultra fin) */
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    padding: 8px 10px; 
+    border-radius: 30px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    transition: background 0.3s ease;
+}
+
+/* Au survol global de la zone menu, on rend le fond un poil plus visible */
+.nav-links:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.nav-links li { padding: 0 15px; } 
+
 .nav-links a { 
     font-family: var(--font-body);
-    color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.95rem; 
-    transition: all 0.2s ease;
+    color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.9rem; 
+    transition: all 0.2s ease; position: relative;
+    /* Petit ombre portée sur le texte pour garantir la lisibilité si le fond est clair */
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
 }
-.nav-links a:hover, .nav-links a.active { color: var(--accent-blue); text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.nav-links a:hover, .nav-links a.active { color: var(--accent-blue); }
 
-/* 4. STRUCTURE & TITRES */
+.nav-links a.active::after {
+    content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; background: var(--accent-blue); border-radius: 50%;
+}
+
+/* --- MOBILE --- */
+.burger { 
+    display: none; cursor: pointer; z-index: 10003;
+    background: rgba(255, 255, 255, 0.3); /* Un peu plus transparent aussi */
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 8px; border-radius: 50%;
+}
+
+@media screen and (max-width: 768px) {
+    .burger { display: block; }
+    
+    .nav-links { 
+        position: fixed; right: 0; top: 0; height: 100vh; width: 100%;
+        /* Sur mobile, on garde un fond plus opaque pour cacher le site derrière */
+        background: rgba(255, 255, 255, 0.95); 
+        backdrop-filter: blur(20px);
+        border-radius: 0; border: none; padding-top: 6rem;
+        flex-direction: column; align-items: center; justify-content: flex-start;
+        gap: 2rem; 
+        transform: translateX(100%); 
+        z-index: 10001;
+    }
+    .nav-links.nav-active { transform: translateX(0%); }
+    .nav-links li { padding: 0; }
+    .nav-links a { font-size: 1.5rem; text-shadow: none; }
+    .navbar { height: 70px; padding-top: 0; }
+}
+
+/* ==========================================================================
+   4. STRUCTURE & TITRES
+   ========================================================================== */
 .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; width: 100%; }
 section { padding: 5rem 0; }
 .page-header { padding-top: 130px; padding-bottom: 2rem; text-align: center; }
 
-h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title { 
+h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title, .comp-title { 
     font-family: var(--font-title); color: var(--primary-blue); 
     line-height: 1.3 !important; padding-top: 5px; padding-bottom: 5px;
     margin-bottom: 1rem; font-weight: 400; letter-spacing: 0.5px;
@@ -129,7 +214,9 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .section-title { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; position: relative; padding-bottom: 0.8rem; }
 .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: var(--accent-blue); margin: 0.5rem auto 0; border-radius: 2px; }
 
-/* 5. HERO SECTION */
+/* ==========================================================================
+   5. HERO SECTION
+   ========================================================================== */
 .hero {
     min-height: 100vh; background: transparent; 
     display: flex; align-items: center; justify-content: center; text-align: center;
@@ -153,18 +240,23 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .hero-subtitle { font-family: var(--font-brand); font-size: 0.9rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1.5rem; font-weight: 700; }
 .hero p { font-family: var(--font-body); font-weight: 400; color: var(--text-main); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2.5rem auto; }
 
-/* 6. CARTES GÉNÉRALES */
+/* ==========================================================================
+   6. CARTES GÉNÉRALES & GLASSMORPHISM (LE RETOUR DU STYLE D'ORIGINE)
+   ========================================================================== */
 .card-preview, .comp-card {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+    /* C'est CE dégradé qui donne l'effet "propre" de ta capture */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 20px; padding: 2rem;
-    position: relative; overflow: hidden; box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.6); 
+    border-radius: 20px; padding: 2rem;
+    position: relative; overflow: hidden; 
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
     transition: all 0.4s ease;
 }
 
 .card-preview:hover, .comp-card:hover {
     transform: translateY(-8px); 
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
     border-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 15px 40px rgba(79, 172, 254, 0.15); 
 }
@@ -178,7 +270,9 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .ac-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
 .ac-code { font-weight: 800; color: var(--accent-blue); min-width: 75px; }
 
-/* 7. BOUTONS & EFFET SHINE  */
+/* ==========================================================================
+   7. BOUTONS & EFFET SHINE
+   ========================================================================== */
 .btn-main, .link-arrow, .btn-small {
     font-family: var(--font-body); position: relative; overflow: hidden; display: inline-block; 
     padding: 0.9rem 2rem; text-decoration: none; border-radius: 50px; font-weight: 600; 
@@ -201,7 +295,9 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 
 @keyframes shine { 100% { left: 200%; } }
 
-/* 8. TIMELINE */
+/* ==========================================================================
+   8. TIMELINE (PARCOURS)
+   ========================================================================== */
 .timeline-container { max-width: 90%; width: 1600px; margin: 0 auto; position: relative; padding: 4rem 0; }
 
 .timeline-container::before {
@@ -235,10 +331,14 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .timeline-item:nth-child(even) .timeline-content::before { right: -60px; }
 
 .timeline-content {
-    background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    /* Style de la carte Timeline comme sur ton image */
+    background: rgba(255, 255, 255, 0.6); 
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.6); padding: 2.5rem; border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: all 0.4s ease;
-    display: flex; flex-direction: column; border-left: 4px solid var(--primary-blue); width: 100%;
+    display: flex; flex-direction: column; 
+    border-left: 4px solid var(--primary-blue); /* La barre bleue à gauche */
+    width: 100%;
 }
 .timeline-item:hover .timeline-content { transform: translateY(-5px); background: rgba(255, 255, 255, 0.9); box-shadow: 0 15px 30px rgba(27, 58, 110, 0.15); border-left-color: var(--accent-blue); }
 
@@ -248,22 +348,26 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .timeline-content ul { padding-left: 1rem; margin: 0; font-size: 1.05rem; }
 .timeline-content li { margin-bottom: 5px; }
 
-/* 9. PAGE PROJETS (STYLE SPÉCIFIQUE) */
+/* ==========================================================================
+   9. PROJETS & COMPÉTENCES (STYLE UNIFIÉ + ANIMATION)
+   ========================================================================== */
 .year-title { font-size: 2rem; color: var(--primary-blue); text-align: left; margin-bottom: 0.5rem; font-weight: 400; }
 .year-separator { width: 100%; height: 2px; background: linear-gradient(to right, var(--accent-blue), transparent); margin-bottom: 2rem; }
 .semester-title { font-size: 1.4rem; color: var(--darker-blue); margin-bottom: 1.5rem; border-left: 4px solid var(--accent-blue); padding-left: 15px; margin-top: 1rem; }
 
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2.5rem; padding-bottom: 2rem; }
 
-.project-card {
+/* Structure des cartes (Même style que timeline/card-preview) */
+.project-card, .comp-card {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 25px; padding: 2.5rem;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; height: 100%;
+    overflow: hidden; /* Important pour l'animation */
 }
 
-.project-card:hover {
+.project-card:hover, .comp-card:hover {
     transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(79, 172, 254, 0.2);
     border-color: var(--accent-blue); background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
 }
@@ -273,15 +377,47 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .project-tags { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-end; }
 .tag { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; background: rgba(79, 172, 254, 0.1); color: var(--primary-blue); border: 1px solid rgba(79, 172, 254, 0.2); }
 
-.project-body h3 { font-size: 1.5rem; color: #0a1e36; margin-bottom: 0.5rem; font-weight: 700; }
+.comp-content, .project-body { flex-grow: 1; z-index: 2; }
+.project-body h3, .comp-title { font-size: 1.5rem; color: #0a1e36; margin-bottom: 0.5rem; font-weight: 700; }
 .project-role { font-size: 0.9rem; color: var(--accent-blue); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
-.project-desc { color: var(--text-main); margin-bottom: 1.5rem; flex-grow: 1; }
+.project-desc { color: var(--text-main); margin-bottom: 1.5rem; flex-grow: 1; font-size: 1.05rem; }
 
-.project-details { list-style: none; padding: 0; margin-bottom: 1rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 1rem; }
-.project-details li { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--text-light); display: flex; align-items: flex-start; }
-.project-details li strong { color: var(--primary-blue); margin-right: 5px; }
+.project-details, .ac-list-1 { list-style: none; padding: 0; margin-bottom: 1rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 1rem; }
+.project-details li, .ac-item { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--text-light); display: flex; align-items: flex-start; }
+.project-details li strong, .ac-code { color: var(--primary-blue); margin-right: 5px; font-weight: 800; min-width: 60px; }
 
-/* 10. NOTCH FOOTER */
+/* ANIMATION DU BOUTON (SLIDE UP) */
+.card-footer-hidden, .comp-footer {
+    max-height: 0; opacity: 0; margin-top: 0; overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+.btn-small-slide {
+    display: block; width: 100%; text-align: center; background: var(--accent-blue); color: white !important;
+    padding: 0.9rem 1.5rem; border-radius: 50px; text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;
+    position: relative; overflow: hidden;
+    transform: translateY(30px); opacity: 0;
+    transition: transform 0.4s ease 0.1s, opacity 0.4s ease 0.1s;
+}
+
+/* LE BOUTON APPARAIT AU SURVOL */
+.comp-card:hover .card-footer-hidden, .project-card:hover .card-footer-hidden {
+    max-height: 150px; margin-top: 2rem; opacity: 1;
+}
+.comp-card:hover .btn-small-slide, .project-card:hover .btn-small-slide {
+    transform: translateY(0); opacity: 1;
+}
+
+.btn-small-slide::after {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+    transform: skewX(-25deg); transition: none;
+}
+.btn-small-slide:hover::after { animation: shine 0.75s; }
+.btn-small-slide:hover { background-color: var(--primary-blue); }
+
+/* ==========================================================================
+   10. NOTCH FOOTER
+   ========================================================================== */
 .notch-footer { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); z-index: 9998; width: 110px; height: 40px; background: var(--footer-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); overflow: hidden; color: var(--footer-text); cursor: pointer; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .notch-footer:hover, .notch-footer.active { width: 480px; height: 160px; border-radius: 25px; bottom: 25px; background: rgba(15, 23, 42, 0.98); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); }
 .notch-trigger { display: flex; align-items: center; justify-content: center; height: 40px; width: 100%; position: absolute; top: 0; left: 0; transition: opacity 0.2s ease-out; }
@@ -304,8 +440,9 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title {
 .info-link-small.highlight { border-color: var(--accent-blue); color: var(--accent-blue); }
 .info-link-small.highlight:hover { background: var(--accent-blue); color: white; }
 
-
-/* 11. MEDIA QUERIES & MOBILE FIX */
+/* ==========================================================================
+   11. MOBILE FIX
+   ========================================================================== */
 .burger { display: none; cursor: pointer; }
 .burger div { width: 22px; height: 2px; background-color: var(--text-main); margin: 5px; transition: all 0.3s ease; border-radius: 10px; }
 
