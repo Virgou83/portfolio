@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </a>
 
                 <div class="link-row">
-                    <a href="https://www.linkedin.com/in/virgile-sanchez" target="_blank" class="info-link-small">LinkedIn</a>
+                    <a href="https://www.linkedin.com/in/virgile-sanchez-b0780729b/" target="_blank" class="info-link-small">LinkedIn</a>
                     <a href="mon-cv.pdf" target="_blank" class="info-link-small highlight">CV PDF</a>
                 </div>
             </div>
