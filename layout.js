@@ -172,5 +172,53 @@ document.addEventListener('DOMContentLoaded', () => {
             this.classList.toggle('mobile-active');
         });
     });
+// ============================================================
+    // 8. INERTIAL CURSOR FOLLOWER (Le Blob qui suit la souris)
+    // ============================================================
+    
+    // On vérifie qu'on n'est pas sur mobile pour économiser des ressources
+    if (window.matchMedia("(min-width: 769px)").matches) {
+        
+        // 1. Création dynamique du blob (pas besoin de toucher au HTML)
+        const cursorBlob = document.createElement('div');
+        cursorBlob.classList.add('cursor-follower');
+        document.body.appendChild(cursorBlob);
+
+        // 2. Variables de position
+        let mouseX = 0;
+        let mouseY = 0;
+        let blobX = 0;
+        let blobY = 0;
+
+        // 3. Écouteur de mouvement de souris
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Petit effet : le blob apparait quand on bouge, disparait si on sort
+            cursorBlob.style.opacity = 1;
+        });
+
+        document.addEventListener('mouseout', () => {
+            cursorBlob.style.opacity = 0;
+        });
+
+        // 4. Boucle d'animation (Physique fluide)
+       function animateBlob() {
+            const speed = 0.12; // Tu peux garder cette vitesse, ou mettre 0.08 pour plus de lourdeur
+            
+            blobX += (mouseX - blobX) * speed;
+            blobY += (mouseY - blobY) * speed;
+
+            // --- MODIFIE CETTE LIGNE ---
+            // On soustrait 225 (la moitié de 450px) pour que le centre du blob soit sur la souris
+            cursorBlob.style.transform = `translate3d(${blobX - 225}px, ${blobY - 225}px, 0)`; 
+            
+            requestAnimationFrame(animateBlob);
+        }
+
+        // Lancement de la boucle
+        animateBlob();
+    }
 
 });

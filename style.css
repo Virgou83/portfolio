@@ -16,7 +16,7 @@
     --primary-blue: #1b3a6e; 
     --accent-blue: #4facfe;  
     --darker-blue: #0f4c81;
-    --text-main: #2c3e50;
+    --text-main: #162238;
     --text-light: #6c757d;
     --white: #ffffff;
     
@@ -296,12 +296,55 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title, .comp-
 
 .card-preview h3, .card-preview p, .card-preview a { position: relative; z-index: 2; }
 
-/* IMAGES & GRILLES */
-.profile-img { width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 5px solid rgba(255,255,255,0.5); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); animation: subtleFloat 5s ease-in-out infinite alternate; }
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; align-items: center; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-.ac-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; }
-.ac-code { font-weight: 800; color: var(--accent-blue); min-width: 75px; }
+/* ==========================================================================
+   IMAGES & GRILLES (CORRIGÉ & COMPLET)
+   ========================================================================== */
+
+/* 1. L'Animation de flottaison */
+@keyframes profileFloat {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-15px); } 
+}
+
+/* 2. L'Image de profil (avec taille fixe et animation) */
+.profile-img { 
+    width: 280px;          /* Taille fixe garantie */
+    height: 280px; 
+    object-fit: cover; 
+    border-radius: 50%; 
+    border: 5px solid rgba(255,255,255,0.5); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    
+    /* On applique l'animation ici */
+    animation: profileFloat 4s ease-in-out infinite alternate; 
+    will-change: transform;
+}
+
+/* 3. LES GRILLES (C'est ça qui manquait !) */
+.grid-2 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 3rem; 
+    align-items: center; /* Centre verticalement texte et image */
+}
+
+.grid-3 { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 2rem; 
+}
+
+.ac-grid-2 { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 0.5rem 2rem; 
+}
+
+.ac-code { 
+    font-weight: 800; 
+    color: var(--accent-blue); 
+    min-width: 75px; 
+}
 
 /* ==========================================================================
    7. BOUTONS & EFFET SHINE
@@ -563,4 +606,38 @@ body.no-scroll { overflow: hidden !important; position: fixed; width: 100%; }
     .notch-footer:hover, .notch-footer.active { width: 92%; height: auto; flex-direction: column; padding: 20px; }
     .notch-content { flex-direction: column; text-align: center; } .notch-sep { width: 100%; height: 1px; margin: 15px 0; }
     .notch-brand { min-width: auto; } .notch-info { width: 100%; } .info-link { justify-content: center; } .link-row { justify-content: center; }
+}
+
+
+/* ==========================================================================
+   CURSOR FOLLOWER (Version "Derrière la vitre")
+   ========================================================================== */
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 450px;
+    height: 450px;
+    
+    /* J'ai légèrement boosté l'intensité car il est maintenant derrière les vitres */
+    background: radial-gradient(circle, rgba(79, 172, 254, 0.75) 0%, rgba(79, 172, 254, 0.3) 45%, transparent 75%);
+    
+    border-radius: 50%;
+    pointer-events: none; 
+    
+    /* LE CHANGEMENT MAJEUR EST ICI : */
+    /* -1 le place derrière le texte et les cartes, mais devant le fond blanc */
+    z-index: -1; 
+    
+    mix-blend-mode: normal; 
+    filter: blur(60px);
+    
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    opacity: 0; 
+    transition: opacity 0.5s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .cursor-follower { display: none; }
 }
