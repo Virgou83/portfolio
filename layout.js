@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="nav-right">
                 <ul class="nav-links">
                     <li><a href="index.html">Accueil</a></li>
+		    <li><a href="presentation.html">Présentation</a></li>
                     <li><a href="parcours.html">Parcours</a></li>
                     <li><a href="competences.html">Compétences</a></li>
                     <li><a href="projets.html">Projets</a></li>
