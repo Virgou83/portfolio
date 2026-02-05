@@ -3,6 +3,14 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+
+if (!document.querySelector("link[rel*='icon']")) {
+        const link = document.createElement('link');
+        link.type = 'image/png';
+        link.rel = 'icon';
+        link.href = 'favicon.png'; // Assure-toi que l'image est bien à la racine
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }
     
     // 0. INJECTION GLOBALE DU FOND ANIMÉ (BLOBS)
     let bgContainer = document.querySelector('.background-container');
