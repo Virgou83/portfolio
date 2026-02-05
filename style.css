@@ -18,10 +18,10 @@
     --darker-blue: #0f4c81;
     --text-main: #162238;
     --text-light: #6c757d;
-    --white: #ffffff;
+    --white: #f2efe9;
     
     /* FOND LIQUIDE (Le fond clair d'origine) */
-    --bg-color: #f8f9fa; 
+    --bg-color: #f2efe9; 
     --blob-1: rgba(79, 172, 254, 0.30);  
     --blob-2: rgba(45, 212, 191, 0.25);  
     --blob-3: rgba(27, 58, 110, 0.15);   
@@ -29,7 +29,7 @@
     /* GLASSMORPHISM */
     --nav-bg: rgba(255, 255, 255, 0.7); 
     --footer-bg: rgba(15, 23, 42, 0.9);
-    --footer-text: #ffffff;
+    --footer-text: #f2efe9;
 }
 
 /* RESET & CONFIGURATION GLOBALE */
@@ -353,7 +353,7 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title, .comp-
     font-family: var(--font-body); position: relative; overflow: hidden; display: inline-block; 
     padding: 0.9rem 2rem; text-decoration: none; border-radius: 50px; font-weight: 600; 
     transition: all 0.3s ease; z-index: 11; cursor: pointer; border: 2px solid transparent; 
-    background: var(--accent-blue); color: #ffffff !important;
+    background: var(--accent-blue); color: #f2efe9 !important;
     box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
 }
 
