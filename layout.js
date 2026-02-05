@@ -31,7 +31,7 @@ if (!document.querySelector("link[rel*='icon']")) {
 
     // 1. INJECTION DU HEADER (MENU DE NAVIGATION)
     // On garde ta version stable "Icone + Nom" qui ne bug pas
-    const headerHTML = `
+const headerHTML = `
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -39,15 +39,18 @@ if (!document.querySelector("link[rel*='icon']")) {
                 <span class="logo-text">Virgile Sanchez</span>
             </a>
             <div class="nav-right">
-               <ul class="nav-links">
+                <ul class="nav-links">
                     <li><a href="index.html">Accueil</a></li>
                     <li><a href="presentation.html">Présentation</a></li>
                     <li><a href="parcours.html">Parcours</a></li>
                     <li><a href="competences.html">Compétences</a></li>
                     <li><a href="projets.html">Projets</a></li>
                     <li><a href="contact.html">Contact</a></li>
-                    <li id="theme-toggle" style="cursor: pointer; font-size: 1.2rem; padding: 0 10px; user-select: none;">🌙</li>
+                    <li id="theme-toggle-desktop" style="cursor: pointer; font-size: 1.2rem; padding: 0 10px; user-select: none;">🌙</li>
                 </ul>
+                
+                <div id="theme-toggle-mobile" class="mobile-theme-toggle">🌙</div>
+
                 <div class="burger">
                     <div class="line1"></div>
                     <div class="line2"></div>
@@ -232,30 +235,35 @@ if (!document.querySelector("link[rel*='icon']")) {
     }
 
 // ============================================================
-    // 9. GESTION DU DARK MODE
+    // 9. GESTION DU DARK MODE (Desktop + Mobile Synchro)
     // ============================================================
-    const themeToggle = document.getElementById('theme-toggle');
+    const toggleDesktop = document.getElementById('theme-toggle-desktop');
+    const toggleMobile = document.getElementById('theme-toggle-mobile');
     const bodyElement = document.body;
     
-    // 1. Charger la préférence utilisateur
+    // Fonction pour mettre à jour les icônes partout
+    function updateIcons(isDark) {
+        const icon = isDark ? '☀️' : '🌙';
+        if (toggleDesktop) toggleDesktop.textContent = icon;
+        if (toggleMobile) toggleMobile.textContent = icon;
+    }
+
+    // 1. Charger la préférence
     const currentTheme = localStorage.getItem('theme');
     if (currentTheme === 'dark') {
         bodyElement.classList.add('dark-mode');
-        if(themeToggle) themeToggle.textContent = '☀️'; 
+        updateIcons(true);
     }
 
-    // 2. Écouteur de clic
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            bodyElement.classList.toggle('dark-mode');
-            
-            if (bodyElement.classList.contains('dark-mode')) {
-                themeToggle.textContent = '☀️';
-                localStorage.setItem('theme', 'dark'); 
-            } else {
-                themeToggle.textContent = '🌙';
-                localStorage.setItem('theme', 'light'); 
-            }
-        });
+    // 2. Fonction de bascule commune
+    function toggleTheme() {
+        bodyElement.classList.toggle('dark-mode');
+        const isDark = bodyElement.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        updateIcons(isDark);
     }
+
+    // 3. Activer les écouteurs sur les deux boutons
+    if (toggleDesktop) toggleDesktop.addEventListener('click', toggleTheme);
+    if (toggleMobile) toggleMobile.addEventListener('click', toggleTheme);
 });

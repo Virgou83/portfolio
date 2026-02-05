@@ -772,3 +772,49 @@ body.dark-mode .timeline-item:hover .timeline-content {
     background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98)) !important;
     border-color: var(--accent-blue);
 }
+
+/* ==========================================================================
+   HEADER MOBILE OPTIMISÉ (Logo Icone + Toggle externe)
+   ========================================================================== */
+
+/* 1. CONFIGURATION DU BOUTON MOBILE */
+.mobile-theme-toggle {
+    display: none; /* Caché par défaut sur PC */
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-right: 20px; /* Espace entre la lune et le burger */
+    line-height: 1;
+    color: var(--text-main);
+    transition: transform 0.3s ease;
+}
+
+.mobile-theme-toggle:active {
+    transform: scale(0.9);
+}
+
+/* 2. COMPORTEMENT RESPONSIVE (Max 768px) */
+@media screen and (max-width: 768px) {
+    
+    /* A. On cache le texte du logo pour gagner de la place */
+    .logo-text {
+        display: none; 
+    }
+    
+    /* B. On affiche le bouton lune mobile */
+    .mobile-theme-toggle {
+        display: block; 
+    }
+
+    /* C. On cache le bouton lune qui était DANS le menu (pour pas l'avoir en double) */
+    #theme-toggle-desktop {
+        display: none; 
+    }
+    
+    /* D. Ajustement du logo pour qu'il soit joli sans texte (rond parfait) */
+    .logo {
+        padding: 8px; /* Réduit le padding rectangle */
+        border-radius: 50%; /* Devient rond */
+        width: 50px; height: 50px; /* Taille fixe */
+        justify-content: center;
+    }
+}
