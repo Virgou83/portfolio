@@ -331,24 +331,67 @@ h1, h2, h3, .section-title, .timeline-date, .year-title, .semester-title, .comp-
 .hero p { font-family: var(--font-body); font-weight: 400; color: var(--text-main); font-size: 1.1rem; max-width: 500px; margin: 0 auto 2.5rem auto; }
 
 /* ==========================================================================
-   6. CARTES GÉNÉRALES & GLASSMORPHISM (LE RETOUR DU STYLE D'ORIGINE)
+   6. CARTES UNIFIÉES (OPTIMISÉ MOBILE & PC)
    ========================================================================== */
-.card-preview, .comp-card {
-    /* C'est CE dégradé qui donne l'effet "propre" de ta capture */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.6); 
-    border-radius: 20px; padding: 2rem;
-    position: relative; overflow: hidden; 
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+
+/* STYLE DE BASE (Commun à tous) */
+.card-preview, .comp-card, .project-card, .hero-glass-card, .timeline-content {
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
     transition: all 0.4s ease;
+    z-index: 1;
 }
 
-.card-preview:hover, .comp-card:hover {
-    transform: translateY(-8px); 
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
-    border-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 15px 40px rgba(79, 172, 254, 0.15); 
+/* VERSION PC (Écrans > 768px) -> Glassmorphism Activé */
+@media screen and (min-width: 769px) {
+    .card-preview, .comp-card, .project-card, .hero-glass-card, .timeline-content {
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.3));
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+    }
+
+    /* Effet Survol (Uniquement sur PC) */
+    .card-preview:hover, .comp-card:hover, .project-card:hover {
+        transform: translateY(-8px);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+        border-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 15px 40px rgba(79, 172, 254, 0.15);
+    }
+}
+
+/* VERSION MOBILE (Écrans < 768px) -> Opaque & Rapide */
+@media screen and (max-width: 768px) {
+    .card-preview, .comp-card, .project-card, .hero-glass-card, .timeline-content {
+        background: var(--white); /* Couleur unie propre */
+        border: 1px solid rgba(0,0,0,0.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        backdrop-filter: none; /* Désactivé pour la perf */
+    }
+}
+
+/* VERSION DARK MODE (Intégrée) */
+body.dark-mode .card-preview, 
+body.dark-mode .comp-card, 
+body.dark-mode .project-card,
+body.dark-mode .hero-glass-card,
+body.dark-mode .timeline-content {
+    /* Sur PC : Glass sombre / Sur Mobile : Gris foncé opaque */
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+    border-color: rgba(255,255,255,0.1);
+}
+
+/* Sur mobile en dark mode, on force l'opaque total */
+@media screen and (max-width: 768px) {
+    body.dark-mode .card-preview, 
+    body.dark-mode .comp-card, 
+    body.dark-mode .project-card,
+    body.dark-mode .hero-glass-card,
+    body.dark-mode .timeline-content {
+        background: #1e293b !important;
+    }
 }
 
 .card-preview h3, .card-preview p, .card-preview a { position: relative; z-index: 2; }
