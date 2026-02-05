@@ -32,6 +32,63 @@
     --footer-text: #f2efe9;
 }
 
+/* --- CONFIGURATION DARK MODE --- */
+body.dark-mode {
+    /* Couleurs Sombres */
+    --bg-color: #0b1120; 
+    --text-main: #e2e8f0; 
+    --text-light: #94a3b8;
+    
+    /* Ajustement des bleus pour le contraste */
+    --primary-blue: #60a5fa; 
+    --darker-blue: #3b82f6; 
+    
+    /* Blobs plus discrets */
+    --blob-1: rgba(56, 189, 248, 0.15);
+    --blob-2: rgba(45, 212, 191, 0.10);
+    --blob-3: rgba(30, 64, 175, 0.15);
+
+    /* Navigation Sombre */
+    --nav-bg: rgba(15, 23, 42, 0.85);
+    --footer-bg: rgba(15, 23, 42, 0.95);
+    --footer-text: #e2e8f0;
+}
+
+/* FIX MOBILE : Changement du fond des cartes (Dark Glass) */
+body.dark-mode .card-preview, 
+body.dark-mode .comp-card,
+body.dark-mode .project-card,
+body.dark-mode .hero-glass-card,
+body.dark-mode .timeline-content {
+    /* Fond sombre semi-transparent au lieu de blanc */
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
+}
+
+/* Ajustement des éléments spécifiques en Dark Mode */
+body.dark-mode .logo, 
+body.dark-mode .nav-links {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .project-icon, 
+body.dark-mode .timeline-dot {
+    background: #1e293b;
+    border-color: var(--primary-blue);
+}
+
+/* Menu Mobile */
+@media screen and (max-width: 768px) {
+    body.dark-mode .nav-links {
+        background: var(--bg-color);
+    }
+    body.dark-mode .burger div {
+        background-color: var(--text-main);
+    }
+}
+
 /* RESET & CONFIGURATION GLOBALE */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -642,4 +699,76 @@ body.no-scroll { overflow: hidden !important; position: fixed; width: 100%; }
 
 @media screen and (max-width: 768px) {
     .cursor-follower { display: none; }
+}
+
+/* ==========================================================================
+   FIX FINAL V2 : BOUTONS INVERSÉS & COULEURS COMPÉTENCES
+   ========================================================================== */
+
+/* 1. BOUTONS DARK MODE : SOMBRE -> CLAIR (Logique Inversée) */
+
+/* État Normal (Repos) : Fond très sombre, Texte Bleu clair, Bordure visible */
+body.dark-mode .btn-main, 
+body.dark-mode .link-arrow, 
+body.dark-mode .btn-small,
+body.dark-mode .btn-small-slide {
+    background-color: #0f172a !important; /* Bleu nuit presque noir */
+    color: var(--accent-blue) !important;  /* Texte bleu électrique */
+    border: 1px solid var(--accent-blue);  /* Bordure pour le définir */
+    box-shadow: none;
+}
+
+/* État Survol (Hover) : Fond Bleu Clair, Texte Blanc + Effet Shine */
+body.dark-mode .btn-main:hover, 
+body.dark-mode .link-arrow:hover, 
+body.dark-mode .btn-small:hover,
+body.dark-mode .btn-small-slide:hover {
+    background-color: var(--accent-blue) !important; /* On allume la lumière */
+    color: #ffffff !important;
+    border-color: var(--accent-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(79, 172, 254, 0.6); /* Lueur bleue */
+}
+
+/* 2. PAGE COMPÉTENCES (Hiérarchie des couleurs respectée) */
+
+/* Le Titre de la compétence (C1, C2...) : Blanc éclatant */
+body.dark-mode .comp-title {
+    color: #ffffff !important;
+}
+
+/* Le Code (AC21.01) : Bleu Cyan très vif pour ressortir */
+body.dark-mode .ac-code {
+    color: #38bdf8 !important; /* Cyan lumineux */
+}
+
+/* Le Texte de description : Gris clair (différent du blanc titre) */
+body.dark-mode .ac-item span:last-child {
+    color: #cbd5e1 !important; /* Gris "Pierre" lisible */
+}
+
+/* 3. LISIBILITÉ GÉNÉRALE & PAGE PARCOURS */
+
+/* Force le texte standard en clair sur tout le site */
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
+body.dark-mode .section-title, 
+body.dark-mode .timeline-date {
+    color: #f1f5f9 !important;
+}
+
+body.dark-mode p, 
+body.dark-mode li, 
+body.dark-mode .project-desc,
+body.dark-mode .timeline-content p {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .project-role {
+    color: var(--accent-blue) !important;
+}
+
+/* Fix spécifique Timeline : garde le fond sombre au survol */
+body.dark-mode .timeline-item:hover .timeline-content {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98)) !important;
+    border-color: var(--accent-blue);
 }
