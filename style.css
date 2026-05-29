@@ -562,7 +562,7 @@ body.dark-mode .timeline-content {
 
 .project-details, .ac-list-1 { list-style: none; padding: 0; margin-bottom: 1rem; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 1rem; }
 .project-details li, .ac-item { margin-bottom: 0.8rem; font-size: 0.95rem; color: var(--text-light); display: flex; align-items: flex-start; }
-.project-details li strong, .ac-code { color: var(--primary-blue); margin-right: 5px; font-weight: 800; min-width: 60px; }
+.project-details li strong, .ac-code { color: var(--primary-blue); margin-right: 15px; font-weight: 800; min-width: 115px; }
 
 /* ANIMATION DU BOUTON (SLIDE UP) - Compatible Mobile */
 .card-footer-hidden, .comp-footer {
@@ -860,15 +860,5 @@ body.dark-mode .timeline-item:hover .timeline-content {
         width: 50px; height: 50px; /* Taille fixe */
         justify-content: center;
     }
-
-/* --- CORRECTIF DÉFINITIF POUR LE CHEVAUCHEMENT DES CODES AC --- */
-.ac-item {
-    gap: 12px !important; /* Ajoute un espace propre entre le code et la description */
-}
-
-.ac-code {
-    min-width: 120px !important; /* Élargit la zone bleue pour faire rentrer "AC34.01GC2F" */
-    flex-shrink: 0 !important;   /* Interdit à la zone bleue de se faire écraser par le texte de droite */
-}
 
 }
