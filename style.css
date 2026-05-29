@@ -861,10 +861,14 @@ body.dark-mode .timeline-item:hover .timeline-content {
         justify-content: center;
     }
 
-/* --- CORRECTIF CIBLÉ POUR LE CHEVAUCHEMENT DES TITRES C4 ET C5 --- */
-.comp-title {
-    line-height: 1.4 !important;      /* Donne de l'espace entre les lignes quand le texte est long */
-    margin-bottom: 1.2rem !important;  /* Repousse proprement le sous-titre bleu vers le bas */
-    height: auto !important;          /* S'assure que la boîte s'adapte à la longueur du texte */
-    }
+/* --- CORRECTIF DÉFINITIF POUR LE CHEVAUCHEMENT DES CODES AC --- */
+.ac-item {
+    gap: 12px !important; /* Ajoute un espace propre entre le code et la description */
+}
+
+.ac-code {
+    min-width: 120px !important; /* Élargit la zone bleue pour faire rentrer "AC34.01GC2F" */
+    flex-shrink: 0 !important;   /* Interdit à la zone bleue de se faire écraser par le texte de droite */
+}
+
 }
